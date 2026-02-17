@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "brave-search": {
+      "version": "1.0.1",
+      "installedAt": 1771209007301
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1771210227587
+    }
+  }
+}
