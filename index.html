@@ -3,161 +3,791 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 时代下的设计师</title>
+<title>侘寂 — AI 时代的设计师</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&family=Noto+Sans+SC:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@100;300;400&family=Ma+Shan+Zheng&display=swap');
+
 :root {
---gold: #c9a84c;
---gold-light: #e8d08a;
---cream: #f5f0e8;
---dark: #0a0a0a;
---dark2: #111111;
---dark3: #1a1a1a;
---gray: #888;
---gray-light: #bbb;
+  --paper:   #f4efe6;
+  --paper2:  #ede7da;
+  --paper3:  #e5ddd0;
+  --ink:     #2a2118;
+  --ink2:    #4a3f33;
+  --ink3:    #7a6e62;
+  --rust:    #8b4e2a;
+  --sage:    #6e7d5e;
+  --clay:    #a06040;
+  --mist:    #9aabb0;
+  --gold:    #9a7c40;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
+
 body {
-background: var(--dark);
-color: var(--cream);
-font-family: 'Noto Sans SC', sans-serif;
-font-weight: 300;
-overflow-x: hidden;
-cursor: none;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 300;
+  overflow-x: hidden;
 }
-.cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s; mix-blend-mode: difference; }
-.cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s; transform: translate(-50%, -50%); }
-body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9000; opacity: 0.4; }
-.progress-bar { position: fixed; top: 0; left: 0; height: 1px; background: var(--gold); z-index: 1000; transition: width 0.1s linear; box-shadow: 0 0 8px rgba(201,168,76,0.6); }
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; mix-blend-mode: normal; }
-nav .logo { font-family: 'Noto Serif SC', serif; font-size: 13px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; }
-nav .year { font-size: 12px; letter-spacing: 0.2em; color: var(--gray); }
-.hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.03) 0%, transparent 60%); }
-.hero-lines { position: absolute; inset: 0; overflow: hidden; }
-.hero-lines::before, .hero-lines::after { content: ''; position: absolute; left: 50%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.15), transparent); animation: linePulse 4s ease-in-out infinite; }
-.hero-lines::before { height: 100%; top: 0; transform: translateX(-200px); animation-delay: 0s; }
-.hero-lines::after { height: 100%; top: 0; transform: translateX(200px); animation-delay: 2s; }
-@keyframes linePulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
-.pre-title { font-size: 11px; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 32px; opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease 0.5s forwards; }
-.hero-title { font-family: 'Noto Serif SC', serif; font-size: clamp(52px, 8vw, 110px); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; opacity: 0; transform: translateY(40px); animation: fadeUp 1.2s ease 0.8s forwards; }
-.hero-title .line-gold { color: var(--gold); }
-.hero-title .line-dim { color: rgba(245,240,232,0.25); }
-.hero-sub { margin-top: 40px; font-size: 14px; letter-spacing: 0.15em; color: var(--gray-light); opacity: 0; transform: translateY(20px); animation: fadeUp 1s ease 1.4s forwards; max-width: 480px; line-height: 2; }
-.hero-scroll { position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0; animation: fadeUp 1s ease 2s forwards; }
-.hero-scroll span { font-size: 10px; letter-spacing: 0.3em; color: var(--gray); }
-.scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollDown 2s ease-in-out infinite; }
-@keyframes scrollDown { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-section { padding: 120px 60px; position: relative; }
-.divider { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 60px; opacity: 0; transition: opacity 0.8s, width 1s; }
-.divider.visible { opacity: 1; width: 120px; }
-.section-tag { font-size: 10px; letter-spacing: 0.5em; color: var(--gold); text-align: center; margin-bottom: 20px; opacity: 0; transform: translateY(16px); transition: all 0.8s ease; }
-.section-tag.visible { opacity: 1; transform: none; }
-.section-h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(32px, 5vw, 64px); font-weight: 700; text-align: center; line-height: 1.3; margin-bottom: 80px; opacity: 0; transform: translateY(24px); transition: all 1s ease 0.2s; }
-.section-h2.visible { opacity: 1; transform: none; }
-.act1 { background: var(--dark); }
-.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 900px; margin: 0 auto 80px; }
-.stat-card { background: var(--dark3); padding: 48px 36px; text-align: center; opacity: 0; transform: translateY(32px); transition: all 0.8s ease; position: relative; overflow: hidden; }
-.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 1s ease 0.5s; }
-.stat-card.visible { opacity: 1; transform: none; }
-.stat-card.visible::before { transform: scaleX(1); }
-.stat-num { font-family: 'Noto Serif SC', serif; font-size: 64px; font-weight: 900; color: var(--gold); line-height: 1; display: block; }
-.stat-unit { font-size: 24px; }
-.stat-label { font-size: 13px; color: var(--gray-light); margin-top: 16px; line-height: 1.8; letter-spacing: 0.05em; }
-.act2 { background: var(--dark2); }
-.timeline { max-width: 700px; margin: 0 auto; position: relative; }
-.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent); }
-.tl-item { padding: 0 0 64px 48px; position: relative; opacity: 0; transform: translateX(-24px); transition: all 0.8s ease; }
-.tl-item.visible { opacity: 1; transform: none; }
-.tl-dot { position: absolute; left: -4px; top: 4px; width: 9px; height: 9px; background: var(--dark); border: 1px solid var(--gold); border-radius: 50%; transition: background 0.4s ease 0.6s; }
-.tl-item.visible .tl-dot { background: var(--gold); }
-.tl-year { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 12px; }
-.tl-title { font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 700; margin-bottom: 12px; }
-.tl-body { font-size: 15px; color: var(--gray-light); line-height: 2; }
-.act3 { background: var(--dark); }
-.role-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; max-width: 900px; margin: 0 auto; }
-.role-card { background: var(--dark3); padding: 48px 40px; position: relative; overflow: hidden; opacity: 0; transform: scale(0.96); transition: all 0.8s ease; cursor: pointer; }
-.role-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; }
-.role-card:hover::after { opacity: 1; }
-.role-card:hover { transform: scale(1.01) !important; }
-.role-card.visible { opacity: 1; transform: scale(1); }
-.role-num { font-size: 80px; font-weight: 900; color: rgba(201,168,76,0.08); line-height: 1; font-family: 'Noto Serif SC', serif; position: absolute; top: 20px; right: 24px; }
-.role-tag { font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 20px; }
-.role-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; margin-bottom: 16px; line-height: 1.4; }
-.role-body { font-size: 14px; color: var(--gray-light); line-height: 2; }
-.act4 { background: var(--dark2); text-align: center; }
-.manifesto { max-width: 760px; margin: 0 auto; }
-.manifesto p { font-family: 'Noto Serif SC', serif; font-size: clamp(18px, 2.5vw, 28px); line-height: 1.9; color: rgba(245,240,232,0.5); margin-bottom: 32px; opacity: 0; transform: translateY(20px); transition: all 0.9s ease; }
-.manifesto p.visible { opacity: 1; transform: none; color: var(--cream); }
-.manifesto p strong { color: var(--gold); font-weight: 700; }
-.final { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--dark); position: relative; overflow: hidden; }
-.final-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%); animation: breathe 6s ease-in-out infinite; }
-@keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
-.final-quote { font-family: 'Noto Serif SC', serif; font-size: clamp(24px, 4vw, 52px); font-weight: 300; line-height: 1.6; max-width: 700px; opacity: 0; transform: translateY(30px); transition: all 1.2s ease; color: rgba(245,240,232,0.9); }
-.final-quote.visible { opacity: 1; transform: none; }
-.final-quote em { color: var(--gold); font-style: normal; font-weight: 700; }
-.final-author { margin-top: 40px; font-size: 12px; letter-spacing: 0.3em; color: var(--gray); opacity: 0; transition: opacity 1s ease 0.6s; }
-.final-author.visible { opacity: 1; }
-.final-line { width: 1px; height: 80px; background: linear-gradient(to bottom, var(--gold), transparent); margin: 40px auto 0; opacity: 0; transition: opacity 1s ease 1s; }
-.final-line.visible { opacity: 1; }
-footer { padding: 40px 60px; border-top: 1px solid rgba(201,168,76,0.1); display: flex; justify-content: space-between; align-items: center; }
-footer .ft-left { font-size: 12px; color: var(--gray); letter-spacing: 0.2em; }
-footer .ft-right { font-size: 11px; color: rgba(201,168,76,0.5); letter-spacing: 0.3em; }
-.bg-number { position: absolute; font-family: 'Noto Serif SC', serif; font-size: 260px; font-weight: 900; color: rgba(201,168,76,0.025); pointer-events: none; line-height: 1; user-select: none; }
-.ticker-wrap { overflow: hidden; border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); padding: 16px 0; background: var(--dark2); }
-.ticker { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
-.ticker span { font-size: 12px; letter-spacing: 0.3em; color: var(--gold); padding: 0 48px; }
-.ticker span.sep { color: rgba(201,168,76,0.3); }
-@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@media (max-width: 768px) {
-section { padding: 80px 24px; }
-nav { padding: 24px; }
-.stat-grid { grid-template-columns: 1fr; }
-.role-grid { grid-template-columns: 1fr; }
-footer { flex-direction: column; gap: 16px; text-align: center; }
+
+/* paper texture */
+body::before {
+  content:'';
+  position: fixed; inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* scroll progress — thin ink line */
+.progress {
+  position: fixed; top:0; left:0;
+  height: 2px;
+  background: var(--ink2);
+  z-index: 1000;
+  width: 0%;
+  transition: width 0.1s linear;
+  opacity: 0.4;
+}
+
+/* nav */
+nav {
+  position: fixed; top:0; left:0; right:0;
+  z-index:100;
+  padding: 28px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  mix-blend-mode: multiply;
+}
+.nav-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 18px;
+  color: var(--ink2);
+  letter-spacing: 0.2em;
+}
+.nav-sub {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink3);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+}
+
+/* ——— HERO ——— */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 64px 80px;
+  position: relative;
+  overflow: hidden;
+  gap: 40px;
+}
+
+.hero-text { position: relative; z-index:2; }
+
+.hero-kana {
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--ink3);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  margin-bottom: 32px;
+  opacity:0;
+  animation: inkDrop 1s ease 0.4s forwards;
+}
+
+.hero-h1 {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(44px, 5.5vw, 82px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+  opacity:0;
+  animation: inkDrop 1.2s ease 0.7s forwards;
+}
+.hero-h1 .accent { color: var(--rust); }
+
+.hero-divider {
+  width: 48px; height: 1px;
+  background: var(--ink3);
+  margin: 32px 0;
+  opacity:0;
+  animation: inkDrop 0.8s ease 1.2s forwards;
+}
+
+.hero-p {
+  font-size: 15px;
+  line-height: 2.2;
+  color: var(--ink2);
+  max-width: 380px;
+  opacity:0;
+  animation: inkDrop 1s ease 1.4s forwards;
+  letter-spacing: 0.05em;
+}
+
+.hero-illo {
+  position: relative;
+  height: 500px;
+  opacity:0;
+  animation: inkDrop 1.6s ease 0.6s forwards;
+}
+
+/* vertical text label */
+.v-text {
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--ink3);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  white-space: nowrap;
+}
+
+@keyframes inkDrop {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ——— SECTION BASE ——— */
+.ws-section {
+  padding: 100px 64px;
+  position: relative;
+  opacity:0;
+  transform: translateY(32px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.ws-section.visible { opacity:1; transform:none; }
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  color: var(--ink3);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  margin-bottom: 20px;
+}
+
+.section-h2 {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 60px;
+  color: var(--ink);
+}
+
+/* ——— NUMBERS / DATA ——— */
+.data-band {
+  background: var(--paper2);
+  border-top: 1px solid var(--paper3);
+  border-bottom: 1px solid var(--paper3);
+}
+
+.data-row {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  max-width: 960px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+.data-cell {
+  padding: 56px 40px;
+  border-right: 1px solid var(--paper3);
+  opacity:0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  position: relative;
+  overflow: hidden;
+}
+.data-cell:last-child { border-right: none; }
+.data-cell.visible { opacity:1; transform:none; }
+
+.data-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--rust);
+  line-height: 1;
+  display: block;
+  margin-bottom: 12px;
+}
+.data-label {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 2;
+  letter-spacing: 0.04em;
+}
+
+/* ——— TIMELINE ——— */
+.tl-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+  opacity:0;
+  transform: translateX(-20px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.tl-item.visible { opacity:1; transform:none; }
+
+.tl-year {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  font-size: 13px;
+  color: var(--ink3);
+  letter-spacing: 0.2em;
+  padding-top: 4px;
+  text-align: right;
+  border-right: 1px solid var(--paper3);
+  padding-right: 24px;
+  position: relative;
+}
+.tl-year::after {
+  content:'';
+  position:absolute;
+  right:-5px; top:8px;
+  width:9px; height:9px;
+  border-radius:50%;
+  background: var(--paper);
+  border: 1px solid var(--ink3);
+  transition: background 0.4s ease 0.6s;
+}
+.tl-item.visible .tl-year::after { background: var(--clay); border-color: var(--clay); }
+
+.tl-content {}
+.tl-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.tl-body {
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--ink2);
+}
+
+/* ——— ROLES ——— */
+.roles-bg { background: var(--paper2); }
+
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--paper3);
+  max-width: 900px;
+  margin: 0 auto;
+  border: 1px solid var(--paper3);
+}
+
+.role-card {
+  background: var(--paper);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  opacity:0;
+  transform: scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.role-card.visible { opacity:1; transform:scale(1); }
+.role-card:hover .role-illo { transform: scale(1.08) rotate(3deg); }
+
+.role-illo {
+  position: absolute;
+  right: 20px; bottom: 16px;
+  opacity: 0.12;
+  transition: transform 0.6s ease;
+}
+
+.role-idx {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink3);
+  margin-bottom: 20px;
+}
+.role-name {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.role-en {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink3);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 100;
+  margin-bottom: 20px;
+}
+.role-line {
+  width: 32px; height: 1px;
+  background: var(--clay);
+  margin-bottom: 20px;
+}
+.role-body {
+  font-size: 13px;
+  line-height: 2.2;
+  color: var(--ink2);
+}
+
+/* ——— MANIFESTO ——— */
+.manifesto-section {
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+}
+
+.manifesto-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.m-line {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(18px, 2.8vw, 30px);
+  line-height: 2.2;
+  color: var(--ink2);
+  margin-bottom: 0;
+  opacity:0;
+  transform: translateY(16px);
+  transition: opacity 0.9s ease, transform 0.9s ease, color 0.9s ease;
+}
+.m-line.visible { opacity:1; transform:none; color: var(--ink); }
+.m-line .hi { color: var(--rust); }
+.m-line + .m-line { margin-top: 24px; }
+
+/* ——— ENDING ——— */
+.ending {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 64px;
+  position: relative;
+  background: var(--paper);
+}
+
+.ending-quote {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(24px, 4vw, 52px);
+  line-height: 1.8;
+  color: var(--ink);
+  max-width: 600px;
+  opacity:0;
+  transform: translateY(24px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.ending-quote.visible { opacity:1; transform:none; }
+.ending-quote em { color: var(--rust); font-style:normal; }
+
+.ending-seal {
+  margin-top: 56px;
+  opacity:0;
+  transition: opacity 1s ease 0.5s;
+}
+.ending-seal.visible { opacity:1; }
+
+/* ——— TICKER ——— */
+.ticker-band {
+  overflow: hidden;
+  border-top: 1px solid var(--paper3);
+  padding: 14px 0;
+  background: var(--paper2);
+}
+.ticker-inner {
+  display:flex;
+  white-space:nowrap;
+  animation: runTicker 40s linear infinite;
+}
+.ticker-inner span {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--ink3);
+  padding: 0 40px;
+  font-family:'Noto Sans SC', sans-serif;
+  font-weight:100;
+}
+.ticker-inner .dot { color:var(--clay); }
+@keyframes runTicker {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
+
+/* ——— FOOTER ——— */
+footer {
+  padding: 40px 64px;
+  border-top: 1px solid var(--paper3);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:'Noto Sans SC',sans-serif;
+  font-weight:100;
+}
+footer span { font-size:11px; letter-spacing:0.3em; color:var(--ink3); }
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero { grid-template-columns:1fr; padding:100px 24px 60px; }
+  .hero-illo { height:280px; }
+  .ws-section { padding:80px 24px; }
+  .data-row { grid-template-columns:1fr; }
+  .data-cell { border-right:none; border-bottom:1px solid var(--paper3); }
+  .role-grid { grid-template-columns:1fr; }
+  nav { padding:24px; }
+  footer { flex-direction:column; gap:12px; }
 }
 </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="progress-bar" id="progressBar"></div>
+
+<div class="progress" id="prog"></div>
+
 <nav>
-<div class="logo">Designer × AI</div>
-<div class="year">2025 — 蜕变纪</div>
+  <div class="nav-title">侘寂 · 設計</div>
+  <div class="nav-sub">WABI-SABI DESIGN ERA</div>
 </nav>
+
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-<div class="hero-bg"></div>
-<div class="hero-lines"></div>
-<p class="pre-title">A Cinematic Essay</p>
-<h1 class="hero-title"> AI 时代下<br> <span class="line-gold">设计师的蜕变</span><br> <span class="line-dim">与重生</span> </h1>
-<p class="hero-sub">当工具开始思考，人的价值才真正被看见</p>
-<div class="hero-scroll"><span>向下探索</span><div class="scroll-line"></div></div>
+  <div class="hero-text">
+    <p class="hero-kana">わびさび — 不完全の美しさ</p>
+    <h1 class="hero-h1">
+      AI 时代<br>
+      设计师的<br>
+      <span class="accent">蜕变</span>与重生
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-p">万物皆有裂缝，那是光照进来的地方。<br>技术的浪潮不是终结，而是另一场开始。</p>
+  </div>
+
+  <!-- hero illustration: ink branch + circles -->
+  <div class="hero-illo">
+    <svg viewBox="0 0 420 500" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <!-- large wabi circle — imperfect -->
+      <circle cx="210" cy="240" r="170" fill="none" stroke="#2a2118" stroke-width="0.8" opacity="0.12" stroke-dasharray="3,8"/>
+      <circle cx="210" cy="240" r="140" fill="none" stroke="#8b4e2a" stroke-width="0.5" opacity="0.18"/>
+
+      <!-- ink wash blob background -->
+      <ellipse cx="210" cy="260" rx="130" ry="110" fill="#ede7da" opacity="0.7"/>
+
+      <!-- main branch — left to right -->
+      <path d="M40,380 Q100,300 160,220 Q200,160 240,140" fill="none" stroke="#2a2118" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+      <!-- sub branch 1 -->
+      <path d="M160,220 Q180,190 210,175" fill="none" stroke="#2a2118" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+      <!-- sub branch 2 -->
+      <path d="M130,265 Q155,240 175,228" fill="none" stroke="#2a2118" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+      <!-- tiny twig -->
+      <path d="M240,140 Q255,125 270,118" fill="none" stroke="#2a2118" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+      <path d="M240,140 Q248,155 252,168" fill="none" stroke="#2a2118" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+
+      <!-- falling petals / leaves -->
+      <ellipse cx="285" cy="115" rx="8" ry="14" fill="#8b4e2a" opacity="0.35" transform="rotate(-25,285,115)"/>
+      <ellipse cx="310" cy="148" rx="6" ry="10" fill="#8b4e2a" opacity="0.25" transform="rotate(15,310,148)"/>
+      <ellipse cx="268" cy="168" rx="5" ry="9"  fill="#6e7d5e" opacity="0.3"  transform="rotate(-10,268,168)"/>
+      <ellipse cx="340" cy="200" rx="7" ry="12" fill="#8b4e2a" opacity="0.2"  transform="rotate(30,340,200)"/>
+      <ellipse cx="160" cy="150" rx="5" ry="8"  fill="#6e7d5e" opacity="0.25" transform="rotate(-40,160,150)"/>
+      <ellipse cx="100" cy="310" rx="4" ry="7"  fill="#8b4e2a" opacity="0.2"  transform="rotate(20,100,310)"/>
+      <ellipse cx="360" cy="280" rx="6" ry="10" fill="#6e7d5e" opacity="0.2"  transform="rotate(-15,360,280)"/>
+
+      <!-- small stone circles -->
+      <circle cx="320" cy="370" r="28" fill="#d4c9b8" opacity="0.5"/>
+      <circle cx="355" cy="390" r="16" fill="#c4bba8" opacity="0.4"/>
+      <circle cx="295" cy="395" r="10" fill="#bbb0a0" opacity="0.35"/>
+
+      <!-- water ripple bottom -->
+      <ellipse cx="180" cy="440" rx="80" ry="14" fill="none" stroke="#9aabb0" stroke-width="0.6" opacity="0.4"/>
+      <ellipse cx="180" cy="440" rx="55" ry="9"  fill="none" stroke="#9aabb0" stroke-width="0.5" opacity="0.3"/>
+      <ellipse cx="180" cy="440" rx="30" ry="5"  fill="none" stroke="#9aabb0" stroke-width="0.4" opacity="0.25"/>
+
+      <!-- kanji-like vertical strokes decoration -->
+      <line x1="375" y1="80"  x2="375" y2="180" stroke="#2a2118" stroke-width="0.5" opacity="0.15"/>
+      <line x1="382" y1="95"  x2="382" y2="160" stroke="#2a2118" stroke-width="0.5" opacity="0.1"/>
+
+      <!-- moon -->
+      <circle cx="342" cy="100" r="34" fill="#f4efe6" opacity="0.9"/>
+      <circle cx="342" cy="100" r="34" fill="none" stroke="#2a2118" stroke-width="0.5" opacity="0.2"/>
+      <!-- crescent shadow -->
+      <circle cx="354" cy="96"  r="30" fill="#ede7da" opacity="0.85"/>
+
+      <!-- moss dots scattered -->
+      <circle cx="88"  cy="350" r="2" fill="#6e7d5e" opacity="0.4"/>
+      <circle cx="95"  cy="360" r="1.5" fill="#6e7d5e" opacity="0.3"/>
+      <circle cx="80"  cy="365" r="1" fill="#6e7d5e" opacity="0.3"/>
+      <circle cx="380" cy="310" r="2" fill="#6e7d5e" opacity="0.3"/>
+      <circle cx="390" cy="320" r="1.5" fill="#6e7d5e" opacity="0.25"/>
+    </svg>
+    <div class="v-text">AI × 設計師 × 2025</div>
+  </div>
 </section>
-<div class="ticker-wrap"><div class="ticker"><span>设计的本质是解决问题</span><span class="sep">◆</span><span>AI 是工具，不是替代者</span><span class="sep">◆</span><span>创造力无法被复制</span><span class="sep">◆</span><span>感知是设计师的超能力</span><span class="sep">◆</span><span>Vibe Coding 改变了工作流</span><span class="sep">◆</span><span>设计的本质是解决问题</span><span class="sep">◆</span><span>AI 是工具，不是替代者</span><span class="sep">◆</span><span>创造力无法被复制</span><span class="sep">◆</span><span>感知是设计师的超能力</span><span class="sep">◆</span><span>Vibe Coding 改变了工作流</span><span class="sep">◆</span></div></div>
-<section class="act1"><div class="bg-number" style="right:-40px; top:-60px;">01</div><p class="section-tag">ACT I — 恐惧</p><h2 class="section-h2">数字，让我们直视现实</h2><div class="stat-grid"><div class="stat-card"><span class="stat-num">83<span class="stat-unit">%</span></span><p class="stat-label">的设计师表示<br>正感受到 AI 冲击的压力</p></div><div class="stat-card"><span class="stat-num">6×</span><p class="stat-label">AI 工具完成某些<br>视觉任务的速度倍数</p></div><div class="stat-card"><span class="stat-num">40<span class="stat-unit">%</span></span><p class="stat-label">初级设计岗位<br>预计将在五年内消失</p></div></div><p style="text-align:center; font-size:15px; color:var(--gray); max-width:560px; margin:0 auto; line-height:2.2; letter-spacing:0.05em;">这些数字令人不安。<br>但它们只讲述了故事的开头。</p></section>
-<section class="act2"><div class="bg-number" style="left:-40px; top:-60px;">02</div><p class="section-tag">ACT II — 转折</p><h2 class="section-h2">每一次技术革命<br>都重新定义了设计师</h2><div class="timeline"><div class="tl-item"><div class="tl-dot"></div><p class="tl-year">1980s</p><h3 class="tl-title">桌面出版革命</h3><p class="tl-body">Photoshop 诞生。排版工人消失了，但设计师却增加了十倍。<br>工具的进化从未减少创造者，只是重新分配了他们的角色。</p></div><div class="tl-item"><div class="tl-dot"></div><p class="tl-year">2000s</p><h3 class="tl-title">互联网设计浪潮</h3><p class="tl-body">网页设计师、UX 设计师、交互设计师——这些职位甚至不存在于上一个时代。<br>危机成为了新职业的温床。</p></div><div class="tl-item"><div class="tl-dot"></div><p class="tl-year">2010s</p><h3 class="tl-title">移动端与设计系统时代</h3><p class="tl-body">Figma 改写了协作方式。设计不再是个人的孤独创作，<br>而成为团队共同呼吸的语言。</p></div><div class="tl-item" style="padding-bottom:0;"><div class="tl-dot"></div><p class="tl-year">2024 →</p><h3 class="tl-title" style="color:var(--gold);">AI × Vibe Coding 时代</h3><p class="tl-body">设计师第一次可以直接「对话」代码，用直觉驱动工程。<br>这是超能力，不是威胁。</p></div></div></section>
-<section class="act3"><div class="bg-number" style="right:-20px; top:-40px;">03</div><p class="section-tag">ACT III — 重生</p><h2 class="section-h2">新时代设计师<br>的四种进化形态</h2><div class="role-grid"><div class="role-card"><span class="role-num">01</span><p class="role-tag">THE ORCHESTRATOR</p><h3 class="role-title">AI 编导者</h3><p class="role-body">不再亲手绘制每一个像素，而是用精准的提示词指挥 AI 产出，成为创意的指挥家。核心能力：品味、判断、叙事。</p></div><div class="role-card"><span class="role-num">02</span><p class="role-tag">THE HYBRID BUILDER</p><h3 class="role-title">设计 × 代码混血儿</h3><p class="role-body">用 Vibe Coding 将设计稿直接变成可交付的产品原型，打通了设计与工程之间最后一道墙。</p></div><div class="role-card"><span class="role-num">03</span><p class="role-tag">THE EXPERIENCE CURATOR</p><h3 class="role-title">体验策展人</h3><p class="role-body">当 AI 可以生成无数视觉方案，真正稀缺的是懂得「选择什么」的人。设计师成为了品味的守门人。</p></div><div class="role-card"><span class="role-num">04</span><p class="role-tag">THE SYSTEM THINKER</p><h3 class="role-title">系统思维者</h3><p class="role-body">从单点执行者升级为全局架构者——定义设计系统、制定 AI 使用规范、为团队建立创意基础设施。</p></div></div></section>
-<section class="act4"><div class="bg-number" style="left:50%; transform:translateX(-50%); top:-60px; opacity:0.5;">04</div><p class="section-tag">ACT IV — 真相</p><h2 class="section-h2">一些必须说出的话</h2><div class="manifesto"><p>AI 不会取代设计师。<strong>没有判断力的设计师</strong>才会被取代。</p><p>工具从未定义职业。<strong>工具如何被使用</strong>才定义了大师。</p><p>恐惧是信号，告诉你：<strong>是时候进化了。</strong></p><p>真正的设计能力不在于会用哪个软件，<strong>在于你看见了别人看不见的东西。</strong></p></div></section>
-<section class="final"><div class="final-bg"></div><p class="final-quote" id="finalQuote">设计师的未来，不是<em>消失</em>，<br>而是<em>蜕变</em>为更本质的存在——<br>一个能与机器对话的<em>人</em>。</p><p class="final-author" id="finalAuthor">AI 时代设计师宣言 — 2025</p><div class="final-line" id="finalLine"></div></section>
-<footer><span class="ft-left">DESIGNER × AI ERA — 蜕变纪</span><span class="ft-right">CRAFTED WITH VIBE CODING</span></footer>
+
+<!-- TICKER -->
+<div class="ticker-band">
+  <div class="ticker-inner">
+    <span>不完全の美</span><span class="dot">·</span>
+    <span>无常之中自有永恒</span><span class="dot">·</span>
+    <span>残缺即是圆满</span><span class="dot">·</span>
+    <span>工具是桥，创造是彼岸</span><span class="dot">·</span>
+    <span>AI 时代的设计师宣言</span><span class="dot">·</span>
+    <span>不完全の美</span><span class="dot">·</span>
+    <span>无常之中自有永恒</span><span class="dot">·</span>
+    <span>残缺即是圆满</span><span class="dot">·</span>
+    <span>工具是桥，创造是彼岸</span><span class="dot">·</span>
+    <span>AI 时代的设计师宣言</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- ═══ DATA ═══ -->
+<section class="ws-section data-band">
+  <div style="max-width:960px; margin:0 auto;">
+    <p class="section-label">— 01 · 数字如落叶，轻，却有重量</p>
+    <h2 class="section-h2">现实的轮廓</h2>
+  </div>
+  <div class="data-row">
+    <div class="data-cell">
+      <!-- small ink illustration -->
+      <svg width="48" height="48" viewBox="0 0 48 48" style="margin-bottom:20px; opacity:0.5">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="#8b4e2a" stroke-width="0.7" stroke-dasharray="2,5"/>
+        <path d="M16,32 Q22,16 30,24 Q36,30 24,34" fill="#8b4e2a" opacity="0.3"/>
+      </svg>
+      <span class="data-num">83%</span>
+      <p class="data-label">的设计师感受到<br>AI 带来的焦虑与压迫</p>
+    </div>
+    <div class="data-cell">
+      <svg width="48" height="48" viewBox="0 0 48 48" style="margin-bottom:20px; opacity:0.5">
+        <path d="M8,40 Q16,20 24,24 Q32,28 40,8" fill="none" stroke="#2a2118" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="40" cy="8" r="3" fill="#8b4e2a" opacity="0.6"/>
+      </svg>
+      <span class="data-num">6×</span>
+      <p class="data-label">AI 完成视觉任务<br>的速度是人工的六倍</p>
+    </div>
+    <div class="data-cell">
+      <svg width="48" height="48" viewBox="0 0 48 48" style="margin-bottom:20px; opacity:0.5">
+        <path d="M10,38 Q18,10 26,20 Q34,30 38,12" fill="none" stroke="#6e7d5e" stroke-width="1" stroke-linecap="round" stroke-dasharray="3,4"/>
+        <ellipse cx="24" cy="36" rx="12" ry="4" fill="#6e7d5e" opacity="0.2"/>
+      </svg>
+      <span class="data-num">40%</span>
+      <p class="data-label">初级设计岗位<br>预计五年内大幅消减</p>
+    </div>
+  </div>
+  <p style="text-align:center; font-size:13px; color:var(--ink3); margin-top:48px; letter-spacing:0.08em; line-height:2.4; font-family:'Noto Sans SC',sans-serif; font-weight:100;">
+    但凛冬之后，必有春来。<br>这不是终点，是蜕变的起点。
+  </p>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="ws-section">
+  <p class="section-label">— 02 · 每一次技术浪潮，都重塑了创造者</p>
+  <h2 class="section-h2">历史的涟漪</h2>
+
+  <!-- small decorative branch -->
+  <div style="text-align:center; margin-bottom:60px; opacity:0.3;">
+    <svg width="200" height="40" viewBox="0 0 200 40">
+      <path d="M20,20 Q60,8 100,20 Q140,32 180,20" fill="none" stroke="#2a2118" stroke-width="1" stroke-linecap="round"/>
+      <circle cx="100" cy="20" r="3" fill="#8b4e2a" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="tl-wrap">
+    <div class="tl-item">
+      <div class="tl-year">1980s</div>
+      <div class="tl-content">
+        <h3 class="tl-title">桌面出版革命</h3>
+        <p class="tl-body">Photoshop 诞生。排版工匠消失了，但设计师却增加了十倍。工具的进化从未减少创造者，只是重新分配了角色。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000s</div>
+      <div class="tl-content">
+        <h3 class="tl-title">互联网浪潮</h3>
+        <p class="tl-body">网页设计师、UX 设计师、交互设计师——这些职位甚至不存在于上一个时代。危机永远是新职业的孵化器。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2010s</div>
+      <div class="tl-content">
+        <h3 class="tl-title">移动端与设计系统</h3>
+        <p class="tl-body">Figma 改写了协作方式。设计不再是孤独者的创作，而成为团队共同呼吸的语言与系统。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year" style="color:var(--rust);">2024 →</div>
+      <div class="tl-content">
+        <h3 class="tl-title" style="color:var(--rust);">AI × Vibe Coding</h3>
+        <p class="tl-body">设计师第一次可以直接与代码「对话」，用直觉驱动工程。这不是威胁，这是设计师千年以来最大的一次权力扩张。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROLES ═══ -->
+<section class="ws-section roles-bg">
+  <p class="section-label">— 03 · 蜕变的四种形态</p>
+  <h2 class="section-h2">新生之路</h2>
+  <div class="role-grid">
+
+    <div class="role-card">
+      <p class="role-idx">其一</p>
+      <h3 class="role-name">AI 编导者</h3>
+      <p class="role-en">THE ORCHESTRATOR</p>
+      <div class="role-line"></div>
+      <p class="role-body">不再亲手绘制每一个像素，而是用精准的直觉指挥 AI 产出。你是创意的指挥官，品味是你的武器。</p>
+      <!-- ink illustration -->
+      <svg class="role-illo" width="80" height="80" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="35" fill="none" stroke="#2a2118" stroke-width="1.5" stroke-dasharray="4,8"/>
+        <path d="M25,40 L40,25 L55,40 L40,55 Z" fill="#8b4e2a" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <div class="role-card">
+      <p class="role-idx">其二</p>
+      <h3 class="role-name">混血构建者</h3>
+      <p class="role-en">THE HYBRID BUILDER</p>
+      <div class="role-line"></div>
+      <p class="role-body">用 Vibe Coding 将设计稿直接变成可交付的产品原型，打通设计与工程之间最后一道墙。</p>
+      <svg class="role-illo" width="80" height="80" viewBox="0 0 80 80">
+        <path d="M15,65 Q30,20 45,40 Q60,60 65,15" fill="none" stroke="#2a2118" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="15" cy="65" r="4" fill="#6e7d5e" opacity="0.5"/>
+        <circle cx="65" cy="15" r="4" fill="#8b4e2a" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="role-card">
+      <p class="role-idx">其三</p>
+      <h3 class="role-name">体验策展人</h3>
+      <p class="role-en">THE EXPERIENCE CURATOR</p>
+      <div class="role-line"></div>
+      <p class="role-body">当 AI 可以生成无限方案，真正稀缺的是懂得「选择什么、舍弃什么」的判断力。侘寂之道，在于减法。</p>
+      <svg class="role-illo" width="80" height="80" viewBox="0 0 80 80">
+        <ellipse cx="40" cy="50" rx="30" ry="20" fill="none" stroke="#9aabb0" stroke-width="1" opacity="0.8"/>
+        <ellipse cx="40" cy="50" rx="20" ry="13" fill="none" stroke="#9aabb0" stroke-width="0.7" opacity="0.6"/>
+        <circle cx="40" cy="50" r="5" fill="#9aabb0" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <div class="role-card">
+      <p class="role-idx">其四</p>
+      <h3 class="role-name">系统思维者</h3>
+      <p class="role-en">THE SYSTEM THINKER</p>
+      <div class="role-line"></div>
+      <p class="role-body">从单点执行者升维为全局架构者。定义设计语言、建立 AI 规范，为整个团队构建创意基础设施。</p>
+      <svg class="role-illo" width="80" height="80" viewBox="0 0 80 80">
+        <path d="M40,10 L70,60 L10,60 Z" fill="none" stroke="#2a2118" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M40,25 L58,55 L22,55 Z" fill="#8b4e2a" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section class="ws-section manifesto-section">
+  <!-- decorative circle -->
+  <div style="margin-bottom:56px; opacity:0.15;">
+    <svg width="120" height="120" viewBox="0 0 120 120" style="display:block;margin:0 auto;">
+      <circle cx="60" cy="60" r="55" fill="none" stroke="#2a2118" stroke-width="0.7" stroke-dasharray="2,6"/>
+      <circle cx="60" cy="60" r="38" fill="none" stroke="#8b4e2a" stroke-width="0.5"/>
+      <circle cx="60" cy="60" r="4" fill="#8b4e2a" opacity="0.5"/>
+    </svg>
+  </div>
+  <p class="section-label">— 04 · 写给此刻迷茫的你</p>
+  <div style="height:32px;"></div>
+  <div class="manifesto-wrap">
+    <p class="m-line">AI 不会取代设计师。<span class="hi">没有判断力的设计师</span>，才会被取代。</p>
+    <p class="m-line">恐惧是信号，<span class="hi">告诉你是时候进化了</span>。</p>
+    <p class="m-line">真正的设计能力不在于会用哪个软件，<span class="hi">在于你看见了别人看不见的东西</span>。</p>
+    <p class="m-line">裂缝，是光照进来的地方。<span class="hi">不完美，才是通往更深处的门。</span></p>
+  </div>
+</section>
+
+<!-- ═══ ENDING ═══ -->
+<section class="ending">
+  <!-- large faint branch behind text -->
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0.05;">
+    <svg width="600" height="600" viewBox="0 0 600 600">
+      <path d="M100,550 Q200,400 280,300 Q340,220 380,160 Q420,100 450,80" fill="none" stroke="#2a2118" stroke-width="4" stroke-linecap="round"/>
+      <path d="M280,300 Q310,260 360,240" fill="none" stroke="#2a2118" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M380,160 Q400,140 430,130" fill="none" stroke="#2a2118" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="455" cy="76" rx="18" ry="28" fill="#8b4e2a" transform="rotate(-20,455,76)"/>
+      <ellipse cx="432" cy="125" rx="13" ry="22" fill="#8b4e2a" transform="rotate(15,432,125)"/>
+      <ellipse cx="362" cy="235" rx="12" ry="20" fill="#6e7d5e" transform="rotate(-10,362,235)"/>
+    </svg>
+  </div>
+
+  <p class="ending-quote" id="endQ">
+    设计师的未来，<br>不是<em>消失</em>，<br>而是蜕变为<em>更本质的存在</em>——<br>
+    一个能与机器对话的<em>人</em>。
+  </p>
+
+  <!-- ink seal / stamp -->
+  <div class="ending-seal" id="endS">
+    <svg width="80" height="80" viewBox="0 0 80 80">
+      <rect x="8" y="8" width="64" height="64" rx="4" fill="none" stroke="#8b4e2a" stroke-width="1.5" opacity="0.5"/>
+      <rect x="14" y="14" width="52" height="52" rx="2" fill="none" stroke="#8b4e2a" stroke-width="0.5" opacity="0.3"/>
+      <text x="40" y="48" text-anchor="middle" font-family="'Ma Shan Zheng', cursive" font-size="26" fill="#8b4e2a" opacity="0.6">蜕</text>
+    </svg>
+  </div>
+</section>
+
+<!-- TICKER bottom -->
+<div class="ticker-band">
+  <div class="ticker-inner" style="animation-direction:reverse;">
+    <span>侘寂设计哲学</span><span class="dot">·</span>
+    <span>Vibe Coding 新工作流</span><span class="dot">·</span>
+    <span>不完美即是完美</span><span class="dot">·</span>
+    <span>AI 是工具，人是灵魂</span><span class="dot">·</span>
+    <span>设计师蜕变宣言 2025</span><span class="dot">·</span>
+    <span>侘寂设计哲学</span><span class="dot">·</span>
+    <span>Vibe Coding 新工作流</span><span class="dot">·</span>
+    <span>不完美即是完美</span><span class="dot">·</span>
+    <span>AI 是工具，人是灵魂</span><span class="dot">·</span>
+    <span>设计师蜕变宣言 2025</span><span class="dot">·</span>
+  </div>
+</div>
+
+<footer>
+  <span>侘寂 · AI 时代设计师</span>
+  <span>CRAFTED WITH VIBE CODING · 2025</span>
+</footer>
+
 <script>
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx - 4 + 'px'; cursor.style.top = my - 4 + 'px'; });
-function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
-animRing();
-const bar = document.getElementById('progressBar');
-window.addEventListener('scroll', () => { const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100; bar.style.width = pct + '%'; });
-const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
-document.querySelectorAll('.section-tag, .section-h2, .divider, .stat-card, .tl-item, .role-card, .manifesto p, .final-quote, .final-author, .final-line').forEach((el, i) => { if (el.closest('.manifesto')) { el.style.transitionDelay = (i % 4) * 0.2 + 's'; } io.observe(el); });
-document.querySelectorAll('.stat-card').forEach((el, i) => { el.style.transitionDelay = i * 0.15 + 's'; });
-document.querySelectorAll('.role-card').forEach((el, i) => { el.style.transitionDelay = i * 0.12 + 's'; });
-document.querySelectorAll('.tl-item').forEach((el, i) => { el.style.transitionDelay = i * 0.15 + 's'; });
-window.addEventListener('scroll', () => { document.querySelectorAll('.bg-number').forEach(el => { const rect = el.parentElement.getBoundingClientRect(); const pct = 1 - (rect.top / window.innerHeight); el.style.transform = `translateY(${pct * 40}px)`; }); });
+// scroll progress
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+});
+
+// intersection observer
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(
+  '.ws-section, .data-cell, .tl-item, .role-card, .m-line, #endQ, #endS'
+).forEach((el, i) => {
+  // stagger within groups
+  if (el.classList.contains('data-cell')) el.style.transitionDelay = (Array.from(el.parentElement.children).indexOf(el)) * 0.15 + 's';
+  if (el.classList.contains('tl-item'))  el.style.transitionDelay = (Array.from(el.parentElement.children).indexOf(el)) * 0.18 + 's';
+  if (el.classList.contains('role-card')) el.style.transitionDelay = (Array.from(el.parentElement.children).indexOf(el)) * 0.14 + 's';
+  if (el.classList.contains('m-line'))    el.style.transitionDelay = (Array.from(el.parentElement.children).indexOf(el)) * 0.22 + 's';
+  io.observe(el);
+});
 </script>
 </body>
 </html>
