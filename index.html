@@ -3,359 +3,720 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你不只是一个职位 — AI时代打工人存在的意义</title>
+<title>你不只是一个职位 — 法式圆拱 · 打工人存在的意义</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@100;300&family=Ma+Shan+Zheng&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Caveat:wght@400;500;600;700&display=swap');
 
 :root {
-  --cream:    #f7f3ee;
-  --warm:     #f0e8de;
-  --rose:     #e8c4b8;
-  --dusty:    #c9a99a;
-  --sage:     #9aab98;
-  --mist:     #b8c4cc;
-  --lavender: #c0b4cc;
-  --ink:      #2e2420;
-  --ink2:     #5a4a42;
-  --ink3:     #9a8880;
-  --blush:    #edd8d0;
-  --sky:      #d4e0e8;
+  --terra:   #A86050;   /* terracotta ceiling */
+  --terra2:  #8A4838;
+  --cream:   #F5EDE0;   /* main wall */
+  --cream2:  #EDE5D0;
+  --cream3:  #DDD0B8;
+  --warm:    #F8F4EC;   /* brightest white */
+  --sage:    #8A9A60;   /* olive green */
+  --sage2:   #6A7A48;
+  --sage3:   #4A5A30;
+  --mustard: #C89020;   /* amber yellow */
+  --mustard2:#A87010;
+  --walnut:  #6A3A20;   /* dark wood */
+  --walnut2: #4A2810;
+  --iron:    #282020;   /* iron black */
+  --iron2:   #1A1414;
+  --amber:   #C87030;
+  --ink:     #1E1410;
+  --ink2:    #3E2C20;
+  --ink3:    #7A6858;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-
-body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: 'Noto Serif SC', serif;
-  font-weight: 300;
-  overflow-x: hidden;
-  cursor: none;
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Ma Shan Zheng',cursive;
+  font-weight:400;
+  overflow-x:hidden;
+  cursor:none;
 }
 
-/* custom cursor */
-#cur {
-  position:fixed; width:10px; height:10px;
-  background:var(--dusty); border-radius:50%;
-  pointer-events:none; z-index:9999;
+/* cursor */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;
+  background:var(--terra);pointer-events:none;z-index:9999;
   transform:translate(-50%,-50%);
   transition:width .3s,height .3s,background .3s;
-  mix-blend-mode:multiply;
-}
-#cur.big { width:40px; height:40px; background:var(--rose); opacity:.5; }
+  mix-blend-mode:multiply;}
+#cur.h{width:36px;height:36px;background:var(--mustard);opacity:.6;}
 
-/* grain */
-body::before {
-  content:''; position:fixed; inset:0; z-index:8000; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-}
-
-/* progress */
-#prog { position:fixed;top:0;left:0;height:2px;background:var(--dusty);z-index:1000;width:0;opacity:.7; }
-
-/* floating petals canvas */
-#petals { position:fixed;inset:0;pointer-events:none;z-index:7999; }
-
-/* ─── NAV ─── */
-nav {
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:24px 60px; display:flex;justify-content:space-between;align-items:center;
-}
-.nav-logo { font-family:'Ma Shan Zheng',cursive;font-size:16px;color:var(--ink2);letter-spacing:.15em; }
-.nav-ch { font-size:10px;letter-spacing:.4em;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;font-weight:100; }
-
-/* ─── HERO ─── */
-.hero {
-  min-height:100vh; display:grid; grid-template-columns:1fr 1fr;
-  align-items:center; padding:100px 60px 60px; position:relative; overflow:hidden;
+/* herringbone texture overlay */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:8000;
+  background-image:
+    linear-gradient(45deg,rgba(106,58,32,.04) 25%,transparent 25%),
+    linear-gradient(-45deg,rgba(106,58,32,.04) 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,rgba(106,58,32,.04) 75%),
+    linear-gradient(-45deg,transparent 75%,rgba(106,58,32,.04) 75%);
+  background-size:12px 12px;
+  background-position:0 0,0 6px,6px -6px,-6px 0;
 }
 
-.hero-bg-wash {
-  position:absolute;inset:0;
-  background: radial-gradient(ellipse 80% 70% at 65% 45%, rgba(232,196,184,.25) 0%, transparent 65%),
-              radial-gradient(ellipse 50% 60% at 30% 70%, rgba(154,171,152,.12) 0%, transparent 60%);
-  pointer-events:none;
+/* progress bar */
+#prog{position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--terra),var(--mustard),var(--sage));
+  z-index:1000;width:0%;transition:width .1s;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:700;
+  padding:22px 64px;display:flex;justify-content:space-between;align-items:center;
+  background:rgba(245,237,224,0);transition:background .6s,border-bottom .6s;
+}
+nav.scrolled{background:rgba(245,237,224,.96);border-bottom:1px solid var(--cream3);}
+.nlogo{font-family:'Caveat',cursive;font-size:22px;font-style:italic;
+  font-weight:400;color:var(--walnut);letter-spacing:.08em;}
+.nright{font-size:11px;letter-spacing:.4em;color:var(--ink3);font-weight:400;}
+
+/* ═══════════════════════════════
+   HERO — terracotta ceiling + arch
+═══════════════════════════════ */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;background:var(--cream);
 }
 
-.hero-left { position:relative; z-index:2; }
-
-.chapter-tag {
-  display:inline-block; font-size:10px; letter-spacing:.5em;
-  color:var(--ink3); font-family:'Noto Sans SC',sans-serif; font-weight:100;
-  margin-bottom:28px; opacity:0; animation:rise 1s ease .3s forwards;
+/* terracotta "ceiling" band */
+.terra-ceil{
+  position:absolute;top:0;left:0;right:0;height:38%;
+  background:var(--terra);
+  clip-path:polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);
+  z-index:0;
 }
 
-.hero-h1 {
+/* plaster molding on ceiling band */
+.ceil-mold{
+  position:absolute;top:0;left:0;right:0;height:38%;z-index:1;pointer-events:none;
+}
+
+/* hero content */
+.hero-content{position:relative;z-index:3;padding:0 60px;}
+
+.hero-eyebrow{
+  font-size:11px;letter-spacing:.55em;color:rgba(248,244,236,.8);
+  margin-bottom:20px;font-weight:400;
+  opacity:0;animation:fadeUp .8s ease .3s forwards;
+}
+.hero-script{
   font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(42px,5.5vw,78px); line-height:1.4; font-weight:400;
-  opacity:0; animation:rise 1.2s ease .6s forwards;
-}
-.hero-h1 .rose { color:#b8786a; }
-.hero-h1 .sage { color:#6a8a68; }
-
-.hero-sub {
-  margin-top:32px; font-size:14px; line-height:2.4; color:var(--ink2);
-  max-width:380px; opacity:0; animation:rise 1s ease 1.1s forwards; letter-spacing:.05em;
+  font-size:clamp(16px,2vw,22px);color:rgba(248,244,236,.65);
+  letter-spacing:.15em;margin-bottom:16px;
+  opacity:0;animation:fadeUp .8s ease .5s forwards;
 }
 
-.hero-cta {
-  margin-top:48px; opacity:0; animation:rise 1s ease 1.5s forwards;
-  display:flex; align-items:center; gap:16px;
+/* BIG ARCH containing the main title */
+.arch-frame{
+  position:relative;display:inline-block;
+  padding:56px 80px 48px;margin-bottom:0;
+  opacity:0;animation:fadeUp 1s ease .7s forwards;
 }
-.cta-btn {
-  padding:12px 28px; border:1px solid var(--dusty); background:transparent;
-  font-family:'Noto Serif SC',serif; font-size:13px; color:var(--ink2);
-  cursor:none; letter-spacing:.1em;
-  transition:background .4s,color .4s;
-  border-radius:0;
-}
-.cta-btn:hover { background:var(--dusty); color:var(--cream); }
-.cta-note { font-size:11px; color:var(--ink3); letter-spacing:.2em; font-family:'Noto Sans SC',sans-serif;font-weight:100; }
-
-/* hero illustration */
-.hero-illo {
-  position:relative;height:580px;
-  opacity:0;animation:rise 1.6s ease .4s forwards;
-  transform-style:preserve-3d;
-}
-#hero-svg { width:100%;height:100%;transition:transform .1s linear; }
-
-@keyframes rise {
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
+.arch-frame::before{
+  content:'';position:absolute;inset:0;
+  background:var(--warm);
+  border-radius:200px 200px 0 0 / 160px 160px 0 0;
+  border:2px solid var(--cream3);
+  box-shadow:inset 0 0 0 8px var(--cream),inset 0 0 0 10px var(--cream3);
+  z-index:-1;
 }
 
-/* scroll hint */
-.scroll-hint {
+.hero-h1{
+  font-family:'Ma Shan Zheng',cursive;
+  font-size:clamp(40px,6vw,82px);font-weight:700;
+  line-height:1.2;color:var(--ink);letter-spacing:-.02em;
+}
+.hero-h1 .terra{color:var(--terra);}
+.hero-h1 .sage-c{color:var(--sage);}
+.hero-h1 .mustard-c{color:var(--mustard);}
+
+.hero-divider{
+  display:flex;align-items:center;gap:16px;margin:28px auto;width:fit-content;
+  opacity:0;animation:fadeUp .8s ease 1.1s forwards;
+}
+.hdiv-line{width:60px;height:1px;background:var(--cream3);}
+.hdiv-orn{font-size:18px;color:var(--terra);font-family:'Caveat',cursive;}
+
+.hero-sub{
+  font-size:18px;line-height:2;color:var(--ink2);
+  max-width:440px;margin:0 auto;font-style:italic;
+  opacity:0;animation:fadeUp .9s ease 1.3s forwards;
+}
+
+.hero-cta{
+  margin-top:44px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .8s ease 1.6s forwards;
+}
+.btn-arch{
+  padding:14px 40px;background:var(--terra);color:var(--warm);
+  border:none;cursor:none;font-family:'Caveat',cursive;
+  font-size:17px;font-weight:400;letter-spacing:.12em;
+  border-radius:80px 80px 0 0 / 40px 40px 0 0;
+  box-shadow:0 6px 20px rgba(168,96,80,.3);
+  transition:all .3s;
+}
+.btn-arch:hover{background:var(--terra2);transform:translateY(-3px);box-shadow:0 10px 28px rgba(168,96,80,.4);}
+.btn-ghost{
+  padding:14px 32px;background:transparent;color:var(--walnut);
+  border:1.5px solid var(--cream3);cursor:none;
+  font-family:'Caveat',cursive;font-size:16px;letter-spacing:.12em;
+  border-radius:80px 80px 0 0 / 40px 40px 0 0;
+  transition:all .3s;
+}
+.btn-ghost:hover{border-color:var(--walnut);background:var(--cream2);}
+
+/* scroll indicator */
+.scroll-ind{
   position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:10px;
-  opacity:0;animation:rise 1s ease 2.2s forwards;
+  opacity:0;animation:fadeUp 1s ease 2.2s forwards;
 }
-.scroll-hint span{font-size:10px;letter-spacing:.4em;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;font-weight:100;}
-.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--dusty),transparent);animation:drip 2s ease-in-out infinite;}
-@keyframes drip{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+.scroll-ind span{font-size:10px;letter-spacing:.4em;color:var(--ink3);}
+.scroll-arch{
+  width:20px;height:32px;border:1px solid var(--cream3);
+  border-radius:20px 20px 0 0;position:relative;overflow:hidden;
+}
+.scroll-ball{
+  width:5px;height:5px;border-radius:50%;background:var(--terra);
+  position:absolute;left:50%;transform:translateX(-50%);top:4px;
+  animation:scrollBall 2s ease-in-out infinite;
+}
+@keyframes scrollBall{0%{top:4px;opacity:1;}70%{top:20px;opacity:.3;}100%{top:4px;opacity:1;}}
 
-/* ─── SECTION BASE ─── */
-.chapter {
-  padding:110px 60px; position:relative;
-  opacity:0;transform:translateY(40px);
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══════════════════════════════
+   MOLDING TICKER
+═══════════════════════════════ */
+.mold-ticker{
+  background:var(--iron);overflow:hidden;
+  border-top:3px solid var(--mustard);border-bottom:3px solid var(--mustard);
+}
+.mt-inner{display:flex;white-space:nowrap;animation:run 38s linear infinite;padding:14px 0;}
+.mt-inner span{font-size:11px;letter-spacing:.45em;color:rgba(245,237,224,.65);
+  padding:0 36px;font-family:'Caveat',cursive;}
+.mt-inner .orn{color:var(--mustard);font-size:16px;padding:0 20px;}
+@keyframes run{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ═══════════════════════════════
+   SECTION BASE — arch-framed
+═══════════════════════════════ */
+.section{
+  padding:100px 64px;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(32px);
   transition:opacity 1.1s ease,transform 1.1s ease;
 }
-.chapter.in { opacity:1;transform:none; }
+.section.in{opacity:1;transform:none;}
 
-.ch-label {
-  font-size:10px;letter-spacing:.5em;color:var(--ink3);
-  font-family:'Noto Sans SC',sans-serif;font-weight:100;margin-bottom:16px;
+/* section arch decoration top */
+.section-arch-top{
+  width:160px;height:80px;
+  border-left:1.5px solid var(--cream3);
+  border-right:1.5px solid var(--cream3);
+  border-top:1.5px solid var(--cream3);
+  border-radius:80px 80px 0 0;
+  margin:0 auto 48px;
+  position:relative;
 }
-.ch-h2 {
+.section-arch-top::after{
+  content:'';position:absolute;top:12px;left:12px;right:12px;
+  height:calc(100% - 12px);
+  border-left:1px solid var(--cream3);
+  border-right:1px solid var(--cream3);
+  border-top:1px solid var(--cream3);
+  border-radius:70px 70px 0 0;
+}
+
+.sec-label{
+  font-size:11px;letter-spacing:.5em;color:var(--ink3);
+  font-family:'Caveat',cursive;text-align:center;margin-bottom:14px;
+  opacity:0;transform:translateY(12px);transition:opacity .8s,transform .8s;
+}
+.sec-label.in{opacity:1;transform:none;}
+
+.sec-h2{
   font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(30px,4vw,54px);font-weight:400;line-height:1.5;
-  margin-bottom:56px;
+  font-size:clamp(28px,4vw,52px);font-weight:700;
+  text-align:center;line-height:1.4;margin-bottom:64px;
+  opacity:0;transform:translateY(18px);transition:opacity 1s ease .15s,transform 1s ease .15s;
+}
+.sec-h2.in{opacity:1;transform:none;}
+
+/* ═══════════════════════════════
+   CH1 — DATA (cream bg)
+═══════════════════════════════ */
+.ch1{background:var(--cream2);}
+
+.stat-arch-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  max-width:860px;margin:0 auto 64px;
+}
+.stat-arch-card{
+  background:var(--warm);border:1px solid var(--cream3);
+  padding:0;position:relative;overflow:hidden;
+  border-radius:100px 100px 0 0;
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:32px;padding-bottom:36px;
+  box-shadow:0 4px 24px rgba(30,20,16,.06);
+  opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s;
+}
+.stat-arch-card.in{opacity:1;transform:none;}
+.stat-arch-card::before{
+  content:'';position:absolute;top:0;left:12px;right:12px;bottom:0;
+  border-left:1px solid var(--cream3);border-right:1px solid var(--cream3);
+  border-top:1px solid var(--cream3);
+  border-radius:90px 90px 0 0;pointer-events:none;
+}
+.stat-icon{font-size:22px;margin-bottom:16px;opacity:.5;}
+.stat-num{
+  font-family:'Caveat',cursive;font-size:60px;font-weight:600;
+  color:var(--terra);line-height:1;display:block;margin-bottom:14px;
+}
+.stat-label{font-size:14px;color:var(--ink2);line-height:1.9;text-align:center;
+  font-style:italic;padding:0 16px;}
+
+.ch1-quote{
+  max-width:560px;margin:0 auto;text-align:center;
+  font-family:'Caveat',cursive;font-size:clamp(18px,2.2vw,26px);
+  font-style:italic;line-height:2;color:var(--ink2);
+  position:relative;padding:0 40px;
+  opacity:0;transition:opacity 1.1s ease .3s;
+}
+.ch1-quote.in{opacity:1;}
+.ch1-quote::before{content:'\201C';position:absolute;left:0;top:-16px;
+  font-size:72px;color:var(--cream3);font-family:'Caveat',cursive;line-height:1;}
+.ch1-quote::after{content:'\201D';position:absolute;right:0;bottom:-32px;
+  font-size:72px;color:var(--cream3);font-family:'Caveat',cursive;line-height:1;}
+.ch1-quote em{color:var(--terra);font-style:normal;}
+
+/* ═══════════════════════════════
+   CH2 — MIRROR (warm bg, arch layout)
+═══════════════════════════════ */
+.ch2{background:var(--warm);}
+
+.arch-split{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;
 }
 
-/* ─── CH1 weight ─── */
-.weight-grid {
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--rose);max-width:860px;margin:0 auto 60px;
+/* gallery wall cards */
+.gallery-wall{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
 }
-.w-cell {
-  background:var(--cream);padding:48px 32px;text-align:center;
-  opacity:0;transform:translateY(24px);
-  transition:opacity .8s ease,transform .8s ease;
+.gw-card{
+  background:var(--cream);border:1px solid var(--cream3);
+  padding:24px 20px;position:relative;overflow:hidden;cursor:none;
+  border-radius:8px 8px 0 0;
+  transition:all .35s;
+  opacity:0;transform:translateY(16px);
 }
-.w-cell.in{opacity:1;transform:none;}
-.w-num{font-family:'Noto Serif SC',serif;font-size:52px;font-weight:700;color:#b8786a;display:block;line-height:1;margin-bottom:12px;}
-.w-label{font-size:12px;color:var(--ink2);line-height:2;letter-spacing:.05em;}
+.gw-card.in{opacity:1;transform:none;}
+.gw-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--cream3);transition:background .3s;
+}
+.gw-card:hover::before{background:var(--terra);}
+.gw-card.active::before{background:var(--sage);}
+.gw-card:hover{box-shadow:0 8px 28px rgba(30,20,16,.1);}
+.gw-card.active{background:var(--cream2);box-shadow:0 4px 20px rgba(106,58,32,.12);}
+.gw-card.active .gw-body{display:block;}
+.gw-num{font-size:11px;letter-spacing:.4em;color:var(--ink3);
+  font-family:'Caveat',cursive;margin-bottom:10px;}
+.gw-title{font-family:'Ma Shan Zheng',cursive;font-size:17px;font-weight:400;
+  color:var(--ink);line-height:1.4;}
+.gw-body{display:none;font-size:13px;color:var(--ink2);line-height:2;
+  margin-top:12px;font-style:italic;}
 
-.weight-quote {
-  max-width:600px;margin:0 auto;text-align:center;
-  font-family:'Ma Shan Zheng',cursive;font-size:clamp(16px,2.2vw,24px);
-  line-height:2.2;color:var(--ink2);
-  opacity:0;transition:opacity 1s ease .4s;
-}
-.weight-quote.in{opacity:1;}
+/* arch illustration - right side */
+.arch-illo{position:relative;height:480px;}
 
-/* ─── CH2 mirror — interactive ─── */
-.mirror-zone {
-  max-width:800px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
-}
-.mirror-illo { position:relative;height:420px; }
+/* ═══════════════════════════════
+   CH3 — BREATH (sage bg)
+═══════════════════════════════ */
+.ch3{background:var(--sage);color:var(--warm);}
 
-.identity-cards { display:flex;flex-direction:column;gap:16px; }
-.id-card {
-  padding:20px 24px;border:1px solid var(--blush);background:var(--warm);
-  cursor:none;transition:all .4s;position:relative;overflow:hidden;
-  opacity:0;transform:translateX(20px);transition:opacity .7s ease,transform .7s ease,border-color .3s,background .3s;
+.ch3 .sec-label{color:rgba(248,244,236,.65);}
+.ch3 .sec-h2{color:var(--warm);}
+.ch3 .section-arch-top{
+  border-color:rgba(248,244,236,.25);
 }
-.id-card.in{opacity:1;transform:none;}
-.id-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(232,196,184,.3) 0%,transparent 60%);
-  opacity:0;transition:opacity .4s;
-}
-.id-card:hover::before{opacity:1;}
-.id-card:hover{border-color:var(--dusty);}
-.id-card.active{background:var(--blush);border-color:var(--dusty);}
+.ch3 .section-arch-top::after{border-color:rgba(248,244,236,.15);}
 
-.id-title{font-family:'Ma Shan Zheng',cursive;font-size:18px;margin-bottom:6px;color:var(--ink);}
-.id-body{font-size:12px;color:var(--ink2);line-height:1.8;display:none;}
-.id-card.active .id-body{display:block;}
-.id-tag{font-size:10px;letter-spacing:.3em;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;font-weight:100;}
+.bigq{
+  font-family:'Caveat',cursive;
+  font-size:clamp(20px,3vw,36px);font-style:italic;
+  line-height:1.9;color:rgba(248,244,236,.9);
+  max-width:560px;margin:0 auto 52px;text-align:center;
+  opacity:0;transform:translateY(18px);transition:opacity .9s,transform .9s;
+}
+.bigq.in{opacity:1;transform:none;}
+.bigq em{color:var(--mustard);font-style:normal;}
 
-/* ─── CH3 turning point ─── */
-.turning-bg { background:var(--warm); }
-.question-zone {
-  max-width:700px;margin:0 auto;text-align:center;
+/* arch-shaped breath button */
+.breath-arch{
+  width:160px;height:195px;
+  border:1.5px solid rgba(248,244,236,.4);
+  border-radius:80px 80px 0 0;
+  margin:0 auto 16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:none;position:relative;
+  background:rgba(248,244,236,.06);
+  transition:background .4s;
+  animation:breathArch 5s ease-in-out infinite;
 }
-.big-question {
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(24px,3.5vw,44px);line-height:1.8;color:var(--ink);
-  margin-bottom:60px;
+.breath-arch::before{
+  content:'';position:absolute;inset:-12px;
+  border:1px solid rgba(248,244,236,.18);
+  border-radius:90px 90px 0 0;
+  animation:breathArch 5s ease-in-out infinite .7s;
 }
-.breath-btn {
-  display:flex;align-items:center;justify-content:center;
-  width:160px;height:160px;border-radius:50%;
-  background:transparent;border:1.5px solid var(--dusty);
-  margin:0 auto 40px;cursor:none;
-  font-family:'Ma Shan Zheng',cursive;font-size:20px;color:var(--ink2);
-  transition:all .3s;position:relative;
-  animation:breathePulse 4s ease-in-out infinite;
+.breath-arch:hover{background:rgba(248,244,236,.14);}
+@keyframes breathArch{
+  0%,100%{box-shadow:0 0 0 0 rgba(248,244,236,.1);}
+  50%{box-shadow:0 0 0 24px rgba(248,244,236,.0);}
 }
-@keyframes breathePulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(201,169,154,.3);}
-  50%{box-shadow:0 0 0 30px rgba(201,169,154,.0);}
-}
-.breath-btn::before{
-  content:'';position:absolute;inset:-12px;border-radius:50%;
-  border:1px solid rgba(201,169,154,.3);
-  animation:breathePulse 4s ease-in-out infinite .5s;
-}
-.breath-btn::after{
-  content:'';position:absolute;inset:-24px;border-radius:50%;
-  border:.5px solid rgba(201,169,154,.15);
-  animation:breathePulse 4s ease-in-out infinite 1s;
-}
-#breath-text{transition:opacity .4s;}
+#btxt{font-family:'Ma Shan Zheng',cursive;font-size:20px;color:var(--warm);
+  transition:opacity .4s;text-align:center;}
+#bguide{font-size:11px;letter-spacing:.4em;color:rgba(248,244,236,.55);
+  text-align:center;margin-bottom:48px;}
 
-.reflections {
-  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:40px;
-  max-width:560px;margin:40px auto 0;
+.refl-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  max-width:640px;margin:0 auto;
 }
-.refl {
-  padding:16px 20px;border:1px solid var(--blush);background:var(--cream);
-  font-size:13px;color:var(--ink2);line-height:1.8;cursor:none;
-  opacity:0;transform:translateY(12px);
-  transition:opacity .6s ease,transform .6s ease,background .3s,border-color .3s;
-  letter-spacing:.03em;
+.refl{
+  background:rgba(248,244,236,.1);border:1px solid rgba(248,244,236,.2);
+  padding:16px 16px;font-size:13px;color:rgba(248,244,236,.85);
+  line-height:1.9;cursor:none;letter-spacing:.03em;
+  border-radius:4px 4px 0 0;
+  transition:all .3s;
+  opacity:0;transform:translateY(10px);
 }
 .refl.in{opacity:1;transform:none;}
-.refl:hover{background:var(--blush);border-color:var(--dusty);}
-.refl.chosen{background:var(--blush);border-color:var(--dusty);position:relative;}
-.refl.chosen::after{content:'✓';position:absolute;top:8px;right:12px;font-size:12px;color:var(--dusty);}
+.refl:hover{background:rgba(248,244,236,.2);color:var(--warm);}
+.refl.chosen{background:var(--mustard);border-color:var(--mustard);color:var(--iron);}
 
-/* ─── CH4 bloom ─── */
-.bloom-zone {
-  max-width:900px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+#rmsg{text-align:center;margin-top:28px;
+  font-family:'Caveat',cursive;font-style:italic;
+  font-size:20px;color:var(--mustard);opacity:0;transition:opacity .8s;}
+
+/* ═══════════════════════════════
+   CH4 — GROWTH (walnut bg)
+═══════════════════════════════ */
+.ch4{background:var(--walnut2);color:var(--cream);}
+.ch4 .sec-label{color:rgba(245,237,224,.55);}
+.ch4 .sec-h2{color:var(--cream);}
+.ch4 .section-arch-top{border-color:rgba(245,237,224,.15);}
+.ch4 .section-arch-top::after{border-color:rgba(245,237,224,.08);}
+
+.ch4-inner{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
 }
-.bloom-text {}
-.bloom-lines p {
-  font-family:'Ma Shan Zheng',cursive;font-size:clamp(17px,2vw,26px);
-  line-height:2.2;color:var(--ink2);margin-bottom:24px;
-  opacity:0;transform:translateY(16px);
-  transition:opacity .9s ease,transform .9s ease;
+
+.bloom-lines p{
+  font-family:'Caveat',cursive;
+  font-size:clamp(16px,2.1vw,23px);font-style:italic;line-height:2.3;
+  color:rgba(245,237,224,.72);margin-bottom:22px;
+  opacity:0;transform:translateX(-16px);transition:opacity .9s,transform .9s;
 }
 .bloom-lines p.in{opacity:1;transform:none;}
-.bloom-lines p .hi{color:#8a6a58;}
-.bloom-illo{position:relative;height:460px;}
+.bloom-lines p em{color:var(--mustard);font-style:normal;}
 
-/* growth tracker — interactive */
-.growth-track { margin-top:48px; }
-.growth-item {
-  display:flex;align-items:center;gap:16px;margin-bottom:20px;
-  opacity:0;transition:opacity .7s ease;
+.glist{margin-top:40px;}
+.glist-label{font-size:10px;letter-spacing:.5em;color:rgba(245,237,224,.45);
+  margin-bottom:22px;font-family:'Caveat',cursive;}
+.gitem{
+  display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;cursor:none;
+  opacity:0;transform:translateY(8px);transition:opacity .7s,transform .7s;
 }
-.growth-item.in{opacity:1;}
-.g-circle {
-  width:36px;height:36px;border-radius:50%;
-  border:1.5px solid var(--rose);background:var(--cream);
+.gitem.in{opacity:1;transform:none;}
+.gdot{
+  width:30px;height:36px;flex-shrink:0;
+  background:rgba(245,237,224,.06);
+  border:1px solid rgba(245,237,224,.2);
+  border-radius:15px 15px 0 0;
   display:flex;align-items:center;justify-content:center;
-  cursor:none;flex-shrink:0;transition:all .4s;font-size:14px;
+  font-size:12px;color:rgba(245,237,224,.6);
+  transition:all .35s;
 }
-.g-circle:hover{background:var(--rose);}
-.g-circle.done{background:var(--sage);border-color:var(--sage);color:var(--cream);}
-.g-label{font-size:13px;color:var(--ink2);line-height:1.8;transition:color .3s;}
-.g-circle.done + .g-label{color:var(--ink);font-weight:400;}
+.gitem:hover .gdot{background:var(--terra);border-color:var(--terra);color:var(--warm);}
+.gitem.done .gdot{background:var(--sage);border-color:var(--sage);color:var(--warm);}
+.glabel{font-size:14px;line-height:2;color:rgba(245,237,224,.75);
+  padding-top:6px;transition:color .3s;font-style:italic;}
+.gitem:hover .glabel{color:var(--cream);}
 
-/* ─── ENDING ─── */
-.ending {
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
-  padding:80px 60px;position:relative;background:var(--warm);
-  overflow:hidden;
+/* arch illustration - ch4 right */
+.ch4-illo{position:relative;height:480px;}
+
+/* ═══════════════════════════════
+   ENDING — MOOD CARD JOURNAL
+═══════════════════════════════ */
+.ending{
+  background:var(--cream2);
+  padding:100px 64px 80px;position:relative;overflow:hidden;
 }
-.ending-illo{position:absolute;inset:0;pointer-events:none;}
-
-.ending-quote {
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(22px,3.5vw,48px);line-height:1.9;color:var(--ink);
-  max-width:640px;position:relative;z-index:2;
-  opacity:0;transform:translateY(28px);
-  transition:opacity 1.3s ease,transform 1.3s ease;
+.ending::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:220px;
+  background:var(--terra);
+  clip-path:polygon(0 0,100% 0,100% 65%,50% 100%,0 65%);
+  pointer-events:none;z-index:0;
 }
-.ending-quote.in{opacity:1;transform:none;}
-.ending-quote em{color:#b8786a;font-style:normal;}
 
-.ending-sig {
-  margin-top:48px;font-size:12px;letter-spacing:.35em;color:var(--ink3);
-  font-family:'Noto Sans SC',sans-serif;font-weight:100;
-  opacity:0;transition:opacity 1s ease .6s;position:relative;z-index:2;
+/* section header on terra */
+.ending-header{
+  position:relative;z-index:2;text-align:center;margin-bottom:60px;
 }
-.ending-sig.in{opacity:1;}
-
-.ending-seal {
-  margin-top:40px;opacity:0;transition:opacity 1s ease 1s;position:relative;z-index:2;
+.ending-header .sec-label{color:rgba(248,244,236,.7);opacity:1;transform:none;}
+.ending-header h2{
+  font-family:'Ma Shan Zheng',cursive;font-size:clamp(26px,4vw,48px);
+  font-weight:700;color:var(--warm);line-height:1.4;margin-top:12px;
 }
-.ending-seal.in{opacity:1;}
+.ending-header h2 em{color:var(--mustard);font-style:normal;}
 
-/* ─── TICKER ─── */
-.ticker-wrap {
-  overflow:hidden;border-top:1px solid var(--blush);
-  border-bottom:1px solid var(--blush);padding:14px 0;background:var(--warm);
+/* THE CARD — arch-shaped, like a physical postcard */
+.mood-card-wrap{
+  max-width:680px;margin:0 auto;position:relative;z-index:2;
 }
-.ticker-inner{display:flex;white-space:nowrap;animation:tickRun 38s linear infinite;}
-.ticker-inner span{font-size:11px;letter-spacing:.4em;color:var(--ink3);padding:0 36px;
-  font-family:'Noto Sans SC',sans-serif;font-weight:100;}
-.ticker-inner .dot{color:var(--dusty);}
-@keyframes tickRun{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* ─── FOOTER ─── */
+.mood-card{
+  background:var(--warm);
+  border-radius:160px 160px 12px 12px;
+  border:1.5px solid var(--cream3);
+  box-shadow:
+    0 4px 0 var(--cream3),
+    0 8px 40px rgba(30,20,16,.12),
+    inset 0 0 0 10px var(--cream),
+    inset 0 0 0 12px var(--cream3);
+  padding:64px 56px 52px;
+  position:relative;overflow:hidden;
+}
+
+/* paper lines inside card */
+.mood-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    to bottom,
+    transparent 0,transparent 31px,
+    var(--cream3) 31px,var(--cream3) 32px
+  );
+  opacity:.35;
+  margin-top:100px;
+}
+
+/* postmark stamp top right */
+.card-stamp{
+  position:absolute;top:32px;right:40px;
+  width:56px;height:68px;
+  border:1.5px solid var(--cream3);border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;
+}
+.stamp-inner{
+  width:40px;height:40px;border:1px solid var(--cream3);border-radius:50px 50px 0 0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.stamp-label{font-size:8px;letter-spacing:.3em;color:var(--ink3);font-family:'Caveat',cursive;}
+
+/* card date line */
+.card-date{
+  font-size:11px;letter-spacing:.4em;color:var(--ink3);
+  font-family:'Caveat',cursive;margin-bottom:28px;
+  font-style:italic;
+}
+
+/* card title */
+.card-title{
+  font-family:'Ma Shan Zheng',cursive;font-size:22px;font-weight:700;
+  color:var(--ink);margin-bottom:8px;
+}
+.card-subtitle{
+  font-size:14px;color:var(--ink3);font-style:italic;
+  font-family:'Caveat',cursive;margin-bottom:32px;
+}
+
+/* mood picker */
+.mood-picker{
+  display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap;
+}
+.mood-btn{
+  flex:1;min-width:72px;padding:12px 8px;
+  background:var(--cream);border:1.5px solid var(--cream3);
+  border-radius:40px 40px 0 0;cursor:none;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:all .3s;font-family:'Caveat',cursive;
+}
+.mood-btn:hover{border-color:var(--terra);background:var(--cream2);}
+.mood-btn.sel{background:var(--terra);border-color:var(--terra);}
+.mood-btn.sel .mood-emoji{filter:none;}
+.mood-btn.sel .mood-word{color:var(--warm);}
+.mood-emoji{font-size:22px;transition:transform .3s;}
+.mood-btn:hover .mood-emoji,.mood-btn.sel .mood-emoji{transform:scale(1.2);}
+.mood-word{font-size:11px;letter-spacing:.15em;color:var(--ink3);transition:color .3s;}
+
+/* textarea */
+.card-textarea{
+  width:100%;min-height:120px;resize:vertical;
+  background:transparent;border:none;border-bottom:1.5px solid var(--cream3);
+  font-family:'Ma Shan Zheng',cursive;font-size:16px;line-height:2;
+  color:var(--ink2);padding:8px 0;outline:none;
+  transition:border-color .3s;
+}
+.card-textarea:focus{border-color:var(--terra);}
+.card-textarea::placeholder{color:var(--cream3);font-style:italic;}
+
+/* char count */
+.card-footer-row{
+  display:flex;justify-content:space-between;align-items:center;margin-top:20px;
+}
+.char-count{font-size:11px;color:var(--ink3);font-family:'Caveat',cursive;font-style:italic;}
+
+/* save button */
+.save-btn{
+  padding:12px 36px;background:var(--terra);color:var(--warm);
+  border:none;cursor:none;
+  font-family:'Caveat',cursive;font-size:16px;letter-spacing:.15em;
+  border-radius:32px 32px 0 0;
+  box-shadow:0 4px 16px rgba(168,96,80,.3);
+  transition:all .3s;
+}
+.save-btn:hover{background:var(--terra2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,96,80,.4);}
+.save-btn:active{transform:translateY(0);}
+
+/* save confirm */
+.save-flash{
+  text-align:center;margin-top:14px;font-style:italic;
+  font-size:14px;color:var(--terra);font-family:'Caveat',cursive;
+  height:20px;transition:opacity .5s;
+}
+
+/* ── ENTRIES LIST ── */
+.entries-zone{
+  max-width:680px;margin:48px auto 0;position:relative;z-index:2;
+}
+.entries-header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;
+}
+.entries-title{
+  font-size:11px;letter-spacing:.45em;color:var(--ink3);
+  font-family:'Caveat',cursive;
+}
+.clear-btn{
+  font-size:11px;color:var(--ink3);background:none;border:none;cursor:none;
+  font-family:'Caveat',cursive;font-style:italic;
+  transition:color .3s;letter-spacing:.1em;
+}
+.clear-btn:hover{color:var(--terra);}
+
+.entries-list{display:flex;flex-direction:column;gap:14px;}
+
+/* each saved entry — mini postcard */
+.entry-card{
+  background:var(--warm);border:1px solid var(--cream3);
+  border-radius:48px 48px 8px 8px;
+  padding:28px 32px 22px;
+  position:relative;overflow:hidden;
+  animation:cardIn .5s cubic-bezier(.34,1.56,.64,1) forwards;
+  box-shadow:0 2px 12px rgba(30,20,16,.06);
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(16px) scale(.97);}
+  to{opacity:1;transform:none;}
+}
+.entry-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:6px;
+  background:var(--terra);opacity:.35;
+  border-radius:48px 48px 0 0;
+}
+.entry-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.entry-meta{
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;color:var(--ink3);letter-spacing:.25em;
+  font-family:'Caveat',cursive;font-style:italic;
+}
+.entry-mood-badge{
+  font-size:16px;width:28px;height:28px;
+  background:var(--cream2);border-radius:14px 14px 0 0;
+  display:flex;align-items:center;justify-content:center;
+}
+.entry-del{
+  background:none;border:none;font-size:14px;cursor:none;
+  color:var(--cream3);transition:color .3s;padding:4px;
+  font-family:'Caveat',cursive;
+}
+.entry-del:hover{color:var(--terra);}
+.entry-text{
+  font-size:15px;color:var(--ink2);line-height:2;
+  font-family:'Ma Shan Zheng',cursive;font-weight:400;
+  white-space:pre-wrap;
+}
+
+.entries-empty{
+  text-align:center;padding:40px;
+  font-style:italic;color:var(--ink3);font-size:15px;
+  font-family:'Caveat',cursive;
+}
+
+/* quote at very end */
+.end-quote-final{
+  max-width:560px;margin:64px auto 0;text-align:center;
+  position:relative;z-index:2;padding:0 32px;
+}
+.end-quote-final p{
+  font-family:'Ma Shan Zheng',cursive;font-size:clamp(18px,2.5vw,28px);
+  font-weight:700;line-height:1.8;color:var(--ink);
+  opacity:0;transform:translateY(20px);transition:opacity 1.1s,transform 1.1s;
+}
+.end-quote-final p.in{opacity:1;transform:none;}
+.end-quote-final p em{color:var(--terra);font-style:normal;}
+.end-quote-final .sig{
+  margin-top:24px;font-size:12px;letter-spacing:.35em;color:var(--ink3);
+  font-family:'Caveat',cursive;font-style:italic;
+  opacity:0;transition:opacity 1s ease .5s;
+}
+.end-quote-final .sig.in{opacity:1;}
+
+.end-orn{
+  margin-top:44px;text-align:center;
+  opacity:0;transition:opacity 1s ease 1.1s;position:relative;z-index:2;
+}
+.end-orn.in{opacity:1;}
+
+/* mold ticker bottom */
+.mold-ticker-b{background:var(--iron);
+  border-top:3px solid var(--terra);border-bottom:3px solid var(--terra);}
+.mold-ticker-b .mt-inner{animation-direction:reverse;}
+.mold-ticker-b .mt-inner span{color:rgba(245,237,224,.55);}
+
+/* FOOTER */
 footer{
-  padding:36px 60px;border-top:1px solid var(--blush);
+  background:var(--iron);padding:32px 64px;
   display:flex;justify-content:space-between;align-items:center;
-  font-family:'Noto Sans SC',sans-serif;font-weight:100;
+  border-top:1px solid rgba(245,237,224,.1);
 }
-footer span{font-size:11px;letter-spacing:.3em;color:var(--ink3);}
+footer span{font-size:11px;letter-spacing:.35em;color:rgba(245,237,224,.45);
+  font-family:'Caveat',cursive;}
 
-/* ─── DIVIDER ─── */
-.div-line{
-  width:60px;height:1px;background:var(--rose);
-  margin:0 auto 48px;
-  opacity:0;transition:opacity .8s,width 1s;
-}
-.div-line.in{opacity:1;width:120px;}
-
-/* mobile */
+/* MOBILE */
 @media(max-width:768px){
-  .hero,.bloom-zone,.mirror-zone{grid-template-columns:1fr;}
-  .hero-illo,.mirror-illo,.bloom-illo{height:280px;}
-  .chapter,.ending{padding:80px 24px;}
-  nav{padding:20px 24px;}
-  .weight-grid{grid-template-columns:1fr;}
-  .reflections{grid-template-columns:1fr;}
+  .arch-split,.ch4-inner{grid-template-columns:1fr;}
+  .gallery-wall{grid-template-columns:1fr;}
+  .stat-arch-row{grid-template-columns:1fr;}
+  .section,.ending{padding:80px 24px;}
+  .arch-frame{padding:40px 32px 36px;}
+  .arch-illo,.ch4-illo{height:320px;}
+  .refl-grid{grid-template-columns:1fr 1fr;}
+  nav{padding:18px 24px;}
   footer{flex-direction:column;gap:12px;}
+  .ending-arch{padding:48px 32px 44px;}
 }
 </style>
 </head>
@@ -363,646 +724,1088 @@ footer span{font-size:11px;letter-spacing:.3em;color:var(--ink3);}
 
 <div id="cur"></div>
 <div id="prog"></div>
-<canvas id="petals"></canvas>
 
-<nav>
-  <div class="nav-logo">打工人 · 存在</div>
-  <div class="nav-ch">AI TIME · YOUR MEANING</div>
+<nav id="nav">
+  <div class="nlogo">Siri · Design</div>
+  <div class="nright">AI ERA · YOUR MEANING</div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- ══════════════════════════
+     HERO
+══════════════════════════ -->
 <section class="hero">
-  <div class="hero-bg-wash"></div>
-
-  <div class="hero-left">
-    <p class="chapter-tag">PROLOGUE — 序章</p>
-    <h1 class="hero-h1">
-      你不只是<br>
-      一个<span class="rose">职位</span>，<br>
-      一行<span class="sage">代码</span>，<br>
-      一份简历。
-    </h1>
-    <p class="hero-sub">
-      在 AI 接管生产力的这一刻，<br>
-      也许是你这一生里<br>
-      最好的重新认识自己的机会。
-    </p>
-    <div class="hero-cta">
-      <button class="cta-btn" onclick="document.querySelector('.ch1').scrollIntoView({behavior:'smooth'})">开始阅读</button>
-      <span class="cta-note">向下滚动 · 与它对话</span>
-    </div>
-  </div>
-
-  <!-- Kurahashi-style hero illustration: figure at window -->
-  <div class="hero-illo">
-    <svg id="hero-svg" viewBox="0 0 480 580" xmlns="http://www.w3.org/2000/svg">
-      <!-- sky wash -->
-      <defs>
-        <radialGradient id="skyGrad" cx="60%" cy="30%" r="70%">
-          <stop offset="0%" stop-color="#d4e0e8" stop-opacity=".6"/>
-          <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="floorGrad" cx="50%" cy="100%" r="50%">
-          <stop offset="0%" stop-color="#e8c4b8" stop-opacity=".2"/>
-          <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="soft">
-          <feGaussianBlur stdDeviation="1.5" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
-        <filter id="softer">
-          <feGaussianBlur stdDeviation="3"/>
-        </filter>
-      </defs>
-
-      <!-- room background wash -->
-      <rect x="0" y="0" width="480" height="580" fill="url(#skyGrad)"/>
-      <rect x="0" y="380" width="480" height="200" fill="url(#floorGrad)"/>
-
-      <!-- window frame -->
-      <rect x="60" y="40" width="260" height="320" fill="none" stroke="#c9a99a" stroke-width="1.5" opacity=".4"/>
-      <rect x="68" y="48" width="244" height="304" fill="rgba(212,224,232,.25)"/>
-      <!-- window cross -->
-      <line x1="190" y1="40" x2="190" y2="360" stroke="#c9a99a" stroke-width="1" opacity=".35"/>
-      <line x1="60"  y1="200" x2="320" y2="200" stroke="#c9a99a" stroke-width="1" opacity=".35"/>
-
-      <!-- soft light pouring in -->
-      <ellipse cx="190" cy="80" rx="90" ry="40" fill="rgba(255,248,235,.5)" filter="url(#softer)"/>
-      <ellipse cx="190" cy="300" rx="60" ry="20" fill="rgba(255,248,235,.3)" filter="url(#softer)"/>
-
-      <!-- outside scene (through window) — distant blurry -->
-      <ellipse cx="120" cy="140" rx="30" ry="60" fill="#9aab98" opacity=".18" filter="url(#softer)"/>
-      <ellipse cx="160" cy="130" rx="20" ry="70" fill="#9aab98" opacity=".13" filter="url(#softer)"/>
-      <ellipse cx="240" cy="150" rx="25" ry="55" fill="#b8c4cc" opacity=".14" filter="url(#softer)"/>
-      <!-- cloud puffs -->
-      <ellipse cx="100" cy="80" rx="40" ry="18" fill="rgba(255,255,255,.6)" filter="url(#softer)"/>
-      <ellipse cx="230" cy="70" rx="35" ry="15" fill="rgba(255,255,255,.5)" filter="url(#softer)"/>
-
-      <!-- desk -->
-      <rect x="30" y="380" width="340" height="10" rx="2" fill="#d4b8a8" opacity=".6"/>
-      <rect x="30" y="390" width="6"   height="80"  fill="#c4a898" opacity=".4"/>
-      <rect x="364" y="390" width="6"   height="80" fill="#c4a898" opacity=".4"/>
-
-      <!-- laptop on desk -->
-      <rect x="120" y="330" width="130" height="80" rx="4" fill="#e8ddd4" opacity=".7"/>
-      <rect x="124" y="334" width="122" height="70" rx="3" fill="#d4e0e8" opacity=".5"/>
-      <!-- screen glow -->
-      <rect x="126" y="336" width="118" height="66" rx="2" fill="rgba(180,210,230,.4)"/>
-      <!-- keyboard base -->
-      <rect x="110" y="378" width="150" height="8"  rx="3" fill="#ddd0c8" opacity=".6"/>
-
-      <!-- coffee cup -->
-      <ellipse cx="290" cy="372" rx="18" ry="7"  fill="#c4a898" opacity=".5"/>
-      <rect    x="273"  y="340" width="34" height="32" rx="4" fill="#d4b8a8" opacity=".55"/>
-      <path d="M307,350 Q320,350 320,360 Q320,368 307,368" fill="none" stroke="#c4a898" stroke-width="2" opacity=".5"/>
-      <!-- steam -->
-      <path d="M283,336 Q286,328 283,320" fill="none" stroke="#c9a99a" stroke-width=".8" opacity=".4" stroke-linecap="round"/>
-      <path d="M290,334 Q293,325 290,316" fill="none" stroke="#c9a99a" stroke-width=".8" opacity=".35" stroke-linecap="round"/>
-      <path d="M297,336 Q300,327 297,319" fill="none" stroke="#c9a99a" stroke-width=".8" opacity=".3" stroke-linecap="round"/>
-
-      <!-- figure — sitting, back to viewer, looking at window (Kurahashi style: minimal, evocative) -->
-      <!-- chair -->
-      <rect x="155" y="430" width="60" height="6"  rx="2" fill="#c4a898" opacity=".45"/>
-      <rect x="157" y="436" width="4"  height="60" fill="#b89888" opacity=".35"/>
-      <rect x="209" y="436" width="4"  height="60" fill="#b89888" opacity=".35"/>
-      <rect x="153" y="370" width="6"  height="62" rx="2" fill="#c4a898" opacity=".4"/>
-
-      <!-- body - soft silhouette -->
-      <ellipse cx="185" cy="420" rx="22" ry="18" fill="#d4c0b8" opacity=".65" filter="url(#soft)"/>
-      <!-- torso -->
-      <path d="M167,420 Q175,380 185,370 Q195,380 203,420 Z" fill="#c9b0a8" opacity=".6" filter="url(#soft)"/>
-      <!-- head -->
-      <ellipse cx="185" cy="360" rx="16" ry="18" fill="#e8d0c0" opacity=".7" filter="url(#soft)"/>
-      <!-- hair - loose, dark -->
-      <ellipse cx="185" cy="350" rx="18" ry="12" fill="#6a5248" opacity=".55" filter="url(#soft)"/>
-      <path d="M168,352 Q162,368 165,382" fill="none" stroke="#6a5248" stroke-width="4" stroke-linecap="round" opacity=".35" filter="url(#soft)"/>
-      <path d="M202,352 Q208,365 205,378" fill="none" stroke="#6a5248" stroke-width="3" stroke-linecap="round" opacity=".3" filter="url(#soft)"/>
-      <!-- arm resting on desk -->
-      <path d="M167,415 Q155,400 148,390 Q142,385 130,383" fill="none" stroke="#d4c0b8" stroke-width="10" stroke-linecap="round" opacity=".55" filter="url(#soft)"/>
-
-      <!-- small plant on desk -->
-      <rect x="340" y="352" width="16" height="24" rx="2" fill="#c9a99a" opacity=".5"/>
-      <path d="M348,352 Q340,330 330,318" fill="none" stroke="#9aab98" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
-      <ellipse cx="330" cy="316" rx="10" ry="7" fill="#9aab98" opacity=".5"/>
-      <path d="M348,348 Q356,328 365,320" fill="none" stroke="#9aab98" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-      <ellipse cx="365" cy="318" rx="8" ry="6" fill="#9aab98" opacity=".45"/>
-      <path d="M348,345 Q350,325 355,312" fill="none" stroke="#9aab98" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
-      <ellipse cx="355" cy="310" rx="7" ry="5" fill="#b8c8b0" opacity=".4"/>
-
-      <!-- floating text fragments — mood -->
-      <text x="350" y="180" font-family="'Noto Serif SC'" font-size="11" fill="#b8786a" opacity=".35" transform="rotate(-8,350,180)">还有意义吗</text>
-      <text x="80"  y="280" font-family="'Noto Serif SC'" font-size="10" fill="#9aab98" opacity=".3"  transform="rotate(5,80,280)">明天</text>
-      <text x="330" y="260" font-family="'Noto Serif SC'" font-size="9"  fill="#c0b4cc" opacity=".3"  transform="rotate(-3,330,260)">意义</text>
-      <text x="95"  y="130" font-family="'Noto Serif SC'" font-size="10" fill="#c9a99a" opacity=".25" transform="rotate(2,95,130)">我是谁</text>
-
-      <!-- scattered petals in scene -->
-      <ellipse cx="340" cy="200" rx="6"  ry="10" fill="#e8c4b8" opacity=".35" transform="rotate(25,340,200)"/>
-      <ellipse cx="80"  cy="310" rx="5"  ry="8"  fill="#e8c4b8" opacity=".25" transform="rotate(-15,80,310)"/>
-      <ellipse cx="400" cy="140" rx="4"  ry="7"  fill="#c0b4cc" opacity=".3"  transform="rotate(40,400,140)"/>
+  <div class="terra-ceil">
+    <!-- SVG plaster molding on ceiling -->
+    <svg class="ceil-mold" viewBox="0 0 1200 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:.2;">
+      <!-- chandelier chain hint -->
+      <line x1="600" y1="0" x2="600" y2="80" stroke="#F8F4EC" stroke-width="2"/>
+      <!-- chandelier top -->
+      <ellipse cx="600" cy="90" rx="60" ry="12" fill="none" stroke="#F8F4EC" stroke-width="1.2"/>
+      <!-- arms -->
+      <path d="M560,90 Q540,110 530,140" fill="none" stroke="#F8F4EC" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M640,90 Q660,110 670,140" fill="none" stroke="#F8F4EC" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M580,90 Q570,120 565,150" fill="none" stroke="#F8F4EC" stroke-width="1"/>
+      <path d="M620,90 Q630,120 635,150" fill="none" stroke="#F8F4EC" stroke-width="1"/>
+      <circle cx="530" cy="143" r="5" fill="#F8F4EC" opacity=".7"/>
+      <circle cx="670" cy="143" r="5" fill="#F8F4EC" opacity=".7"/>
+      <circle cx="565" cy="153" r="4" fill="#F8F4EC" opacity=".6"/>
+      <circle cx="635" cy="153" r="4" fill="#F8F4EC" opacity=".6"/>
+      <!-- ceiling molding band -->
+      <path d="M0,340 Q200,330 400,335 Q600,340 800,333 Q1000,326 1200,338" fill="none" stroke="#F8F4EC" stroke-width="1" opacity=".5"/>
+      <!-- corner ornament L -->
+      <path d="M60,280 Q80,260 120,270 Q140,275 150,295" fill="none" stroke="#F8F4EC" stroke-width="1.2" opacity=".45"/>
+      <circle cx="60" cy="282" r="4" fill="#F8F4EC" opacity=".4"/>
+      <!-- corner ornament R -->
+      <path d="M1140,280 Q1120,260 1080,270 Q1060,275 1050,295" fill="none" stroke="#F8F4EC" stroke-width="1.2" opacity=".45"/>
+      <circle cx="1140" cy="282" r="4" fill="#F8F4EC" opacity=".4"/>
     </svg>
   </div>
 
-  <div class="scroll-hint">
-    <span>向下滑动</span>
-    <div class="scroll-line"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A FRENCH TALE FOR WORKERS · AI ERA · 2025</p>
+    <p class="hero-script">打工人的圆拱故事</p>
+
+    <div class="arch-frame">
+      <h1 class="hero-h1">
+        你不只是<br>
+        一个<span class="terra">职位</span><br>
+        一份<span class="mustard-c">简历</span><br>
+        <span class="sage-c">一行代码</span>
+      </h1>
+    </div>
+
+    <div class="hero-divider">
+      <div class="hdiv-line"></div>
+      <span class="hdiv-orn">❧</span>
+      <div class="hdiv-line"></div>
+    </div>
+
+    <p class="hero-sub">在 AI 接管重复劳动的这一刻，<br>是你这一生里重新认识自己的最好机会。</p>
+
+    <div class="hero-cta">
+      <button class="btn-arch" onclick="document.querySelector('.ch1').scrollIntoView({behavior:'smooth'})">翻开下一页</button>
+      <button class="btn-ghost">向下探索</button>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <span>SCROLL</span>
+    <div class="scroll-arch"><div class="scroll-ball"></div></div>
   </div>
 </section>
 
 <!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-inner">
-    <span>你今天有没有问过自己</span><span class="dot">·</span>
-    <span>AI 替代的是重复，留下的是你</span><span class="dot">·</span>
-    <span>职场的抑郁不是你的错</span><span class="dot">·</span>
-    <span>不得志只是还没找到方向</span><span class="dot">·</span>
-    <span>早日开窍是一种善待自己</span><span class="dot">·</span>
-    <span>你今天有没有问过自己</span><span class="dot">·</span>
-    <span>AI 替代的是重复，留下的是你</span><span class="dot">·</span>
-    <span>职场的抑郁不是你的错</span><span class="dot">·</span>
-    <span>不得志只是还没找到方向</span><span class="dot">·</span>
-    <span>早日开窍是一种善待自己</span><span class="dot">·</span>
+<div class="mold-ticker">
+  <div class="mt-inner">
+    <span>你今天有没有问过自己</span><span class="orn">❧</span>
+    <span>AI 替代的是重复，留下的是你</span><span class="orn">❧</span>
+    <span>职场的郁闷不是你的错</span><span class="orn">❧</span>
+    <span>不得志只是还没找到方向</span><span class="orn">❧</span>
+    <span>早日开窍是一种温柔的自救</span><span class="orn">❧</span>
+    <span>你今天有没有问过自己</span><span class="orn">❧</span>
+    <span>AI 替代的是重复，留下的是你</span><span class="orn">❧</span>
+    <span>职场的郁闷不是你的错</span><span class="orn">❧</span>
+    <span>不得志只是还没找到方向</span><span class="orn">❧</span>
+    <span>早日开窍是一种温柔的自救</span><span class="orn">❧</span>
   </div>
 </div>
 
-<!-- ═══ CH1 : 重量 ═══ -->
-<section class="chapter ch1">
-  <p class="ch-label">— CHAPTER ONE · 那些说不出口的重</p>
-  <h2 class="ch-h2" style="text-align:center;">你有多久没睡着了？</h2>
-  <div class="weight-grid">
-    <div class="w-cell">
-      <svg width="40" height="40" viewBox="0 0 40 40" style="margin-bottom:16px;opacity:.5">
-        <circle cx="20" cy="20" r="17" fill="none" stroke="#b8786a" stroke-width=".8" stroke-dasharray="2,5"/>
-        <path d="M12,26 Q18,12 24,20 Q30,27 20,29" fill="#b8786a" opacity=".3"/>
-      </svg>
-      <span class="w-num">67%</span>
-      <p class="w-label">打工人感到<br>工作已失去意义感</p>
+<!-- ══════════════════════════
+     CH1 — DATA
+══════════════════════════ -->
+<section class="section ch1">
+  <div class="section-arch-top"></div>
+  <p class="sec-label">— CHAPTER ONE · 那些说不出口的重量</p>
+  <h2 class="sec-h2">你有多久没睡着了？</h2>
+
+  <div class="stat-arch-row">
+    <div class="stat-arch-card">
+      <span class="stat-icon">🕯</span>
+      <span class="stat-num">67%</span>
+      <p class="stat-label">打工人感到<br>工作已失去意义感</p>
     </div>
-    <div class="w-cell">
-      <svg width="40" height="40" viewBox="0 0 40 40" style="margin-bottom:16px;opacity:.5">
-        <path d="M6,34 Q14,16 20,20 Q26,24 34,6" fill="none" stroke="#3d3030" stroke-width="1.2" stroke-linecap="round"/>
-        <circle cx="34" cy="6" r="3" fill="#9aab98" opacity=".7"/>
-      </svg>
-      <span class="w-num">83%</span>
-      <p class="w-label">在 AI 新闻里<br>感到职场焦虑</p>
+    <div class="stat-arch-card">
+      <span class="stat-icon">🪞</span>
+      <span class="stat-num">83%</span>
+      <p class="stat-label">在 AI 消息里<br>感到职场焦虑蔓延</p>
     </div>
-    <div class="w-cell">
-      <svg width="40" height="40" viewBox="0 0 40 40" style="margin-bottom:16px;opacity:.5">
-        <ellipse cx="20" cy="28" rx="15" ry="6" fill="none" stroke="#c0b4cc" stroke-width=".8" opacity=".8"/>
-        <ellipse cx="20" cy="28" rx="9"  ry="3.5" fill="none" stroke="#c0b4cc" stroke-width=".6" opacity=".6"/>
-        <circle  cx="20" cy="28" r="3" fill="#c0b4cc" opacity=".45"/>
-      </svg>
-      <span class="w-num">1/3</span>
-      <p class="w-label">职场人说<br>「我只是在熬」</p>
+    <div class="stat-arch-card">
+      <span class="stat-icon">🌿</span>
+      <span class="stat-num">1/3</span>
+      <p class="stat-label">职场人坦言<br>「我只是在熬」</p>
     </div>
   </div>
-  <p class="weight-quote">
-    「熬」不是你的宿命，<br>它只是你还没找到出口前的<br>一种临时的生存方式。
-  </p>
+
+  <p class="ch1-quote">「熬」不是你的命运，<br>只是你找到出口前<br><em>一种临时的生存姿势。</em></p>
 </section>
 
-<!-- ═══ CH2 : 镜子 ═══ -->
-<section class="chapter">
-  <p class="ch-label">— CHAPTER TWO · 你忘了你还有这些</p>
-  <h2 class="ch-h2">除了职位，你还是——</h2>
-  <div class="mirror-zone">
-    <div class="mirror-illo">
-      <svg viewBox="0 0 360 420" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<!-- ══════════════════════════
+     CH2 — MIRROR / IDENTITY
+══════════════════════════ -->
+<section class="section ch2">
+  <div class="section-arch-top"></div>
+  <p class="sec-label">— CHAPTER TWO · 你忘了你还是这些</p>
+  <h2 class="sec-h2">除了职位，你还是——</h2>
+
+  <div class="arch-split">
+    <!-- arch illustration: French interior arch with figures -->
+    <div class="arch-illo">
+      <svg viewBox="0 0 380 480" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="mirrorGlow" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#edd8d0" stop-opacity=".5"/>
-            <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-          </radialGradient>
+          <filter id="sf"><feGaussianBlur stdDeviation="1.2"/></filter>
+          <filter id="sf2"><feGaussianBlur stdDeviation="2.5"/></filter>
         </defs>
-        <ellipse cx="180" cy="200" rx="140" ry="170" fill="url(#mirrorGlow)"/>
-        <!-- mirror oval frame -->
-        <ellipse cx="180" cy="190" rx="105" ry="130" fill="none" stroke="#d4b8a8" stroke-width="1.5" opacity=".5"/>
-        <ellipse cx="180" cy="190" rx="110" ry="135" fill="none" stroke="#e8c4b8" stroke-width=".6" opacity=".3" stroke-dasharray="3,8"/>
 
-        <!-- reflection figure — soft, dreamy -->
-        <ellipse cx="180" cy="110" rx="22" ry="26" fill="#e8d4c4" opacity=".7" filter="url(#soft)"/>
-        <!-- hair -->
-        <ellipse cx="180" cy="96"  rx="25" ry="16" fill="#8a6a58" opacity=".5" filter="url(#soft)"/>
-        <path d="M158,100 Q152,118 156,134" fill="none" stroke="#8a6a58" stroke-width="5" stroke-linecap="round" opacity=".3"/>
-        <!-- body -->
-        <path d="M158,136 Q168,150 180,155 Q192,150 202,136 Q196,168 190,195 Q186,200 174,195 Q168,168 158,136 Z" fill="#d4c0b4" opacity=".55" filter="url(#soft)"/>
-        <!-- small floating words around reflection -->
-        <text x="50"  y="90"  font-family="'Ma Shan Zheng'" font-size="13" fill="#b8786a" opacity=".5" transform="rotate(-5,50,90)">好奇心</text>
-        <text x="260" y="120" font-family="'Ma Shan Zheng'" font-size="12" fill="#9aab98" opacity=".5" transform="rotate(4,260,120)">共情力</text>
-        <text x="42"  y="180" font-family="'Ma Shan Zheng'" font-size="11" fill="#c0b4cc" opacity=".5" transform="rotate(-3,42,180)">记忆</text>
-        <text x="268" y="200" font-family="'Ma Shan Zheng'" font-size="13" fill="#c9a99a" opacity=".5" transform="rotate(6,268,200)">爱</text>
-        <text x="90"  y="290" font-family="'Ma Shan Zheng'" font-size="12" fill="#9aab98" opacity=".45" transform="rotate(-2,90,290)">创造力</text>
-        <text x="218" y="280" font-family="'Ma Shan Zheng'" font-size="11" fill="#b8786a" opacity=".45" transform="rotate(3,218,280)">直觉</text>
+        <!-- room background warm cream -->
+        <rect x="20" y="20" width="340" height="440" fill="#F8F4EC"/>
 
-        <!-- scattered petals in mirror -->
-        <ellipse cx="130" cy="240" rx="5" ry="8" fill="#e8c4b8" opacity=".3" transform="rotate(20,130,240)"/>
-        <ellipse cx="238" cy="260" rx="4" ry="7" fill="#c0b4cc" opacity=".3" transform="rotate(-25,238,260)"/>
-        <ellipse cx="152" cy="310" rx="3" ry="6" fill="#e8c4b8" opacity=".25" transform="rotate(10,152,310)"/>
+        <!-- TERRACOTTA CEILING area -->
+        <rect x="20" y="20" width="340" height="100" fill="#A86050" opacity=".7"/>
 
-        <!-- stand -->
-        <rect x="162" y="318" width="36" height="6" rx="2" fill="#d4b8a8" opacity=".4"/>
-        <rect x="176" y="324" width="8"  height="30" fill="#c4a898" opacity=".35"/>
-        <rect x="154" y="354" width="52" height="6" rx="2" fill="#d4b8a8" opacity=".4"/>
+        <!-- chandelier hanging from ceiling -->
+        <line x1="190" y1="20" x2="190" y2="52" stroke="#C87030" stroke-width="1.5"/>
+        <ellipse cx="190" cy="58" rx="28" ry="6" fill="none" stroke="#C87030" stroke-width="1.2"/>
+        <path d="M174,58 Q166,72 163,86" fill="none" stroke="#C87030" stroke-width="1" stroke-linecap="round"/>
+        <path d="M206,58 Q214,72 217,86" fill="none" stroke="#C87030" stroke-width="1" stroke-linecap="round"/>
+        <path d="M181,58 Q178,76 176,90" fill="none" stroke="#C87030" stroke-width=".8" stroke-linecap="round"/>
+        <path d="M199,58 Q202,76 204,90" fill="none" stroke="#C87030" stroke-width=".8" stroke-linecap="round"/>
+        <circle cx="163" cy="88" r="3.5" fill="#C87030" opacity=".8"/>
+        <circle cx="217" cy="88" r="3.5" fill="#C87030" opacity=".8"/>
+        <circle cx="176" cy="92" r="3"   fill="#C87030" opacity=".7"/>
+        <circle cx="204" cy="92" r="3"   fill="#C87030" opacity=".7"/>
+
+        <!-- MAIN ARCH — centre wall, ornate -->
+        <!-- outer arch border -->
+        <path d="M68,440 L68,220 Q68,100 190,100 Q312,100 312,220 L312,440" fill="none" stroke="#D0C8B4" stroke-width="2.5"/>
+        <!-- inner arch border -->
+        <path d="M80,440 L80,224 Q80,114 190,114 Q300,114 300,224 L300,440" fill="none" stroke="#D0C8B4" stroke-width="1.2"/>
+        <!-- arch fill -->
+        <path d="M80,440 L80,224 Q80,114 190,114 Q300,114 300,224 L300,440 Z" fill="#F0EAD8" opacity=".6"/>
+
+        <!-- ornate crown at arch top -->
+        <!-- central plaster rosette -->
+        <circle cx="190" cy="112" r="14" fill="#F8F4EC" stroke="#D0C8B4" stroke-width="1"/>
+        <circle cx="190" cy="112" r="8" fill="#F8F4EC" stroke="#D0C8B4" stroke-width=".8"/>
+        <circle cx="190" cy="112" r="3" fill="#D0C8B4"/>
+        <!-- side scrolls -->
+        <path d="M76,220 Q60,200 72,185" fill="none" stroke="#D0C8B4" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M304,220 Q320,200 308,185" fill="none" stroke="#D0C8B4" stroke-width="1.2" stroke-linecap="round"/>
+
+        <!-- FIREPLACE with checkerboard -->
+        <!-- surround white marble -->
+        <rect x="128" y="340" width="124" height="88" rx="2" fill="#F0EAD8" stroke="#D0C8B4" stroke-width="1.2"/>
+        <!-- checkerboard -->
+        <rect x="134" y="346" width="112" height="76" fill="#1A1414"/>
+        <!-- checker squares white -->
+        <rect x="134" y="346" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="162" y="346" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="190" y="346" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="218" y="346" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="134" y="374" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="162" y="374" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="190" y="374" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="218" y="374" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="148" y="360" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="176" y="360" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="204" y="360" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="232" y="360" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="148" y="388" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="176" y="388" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="204" y="388" width="14" height="14" fill="#F8F4EC"/>
+        <rect x="232" y="388" width="14" height="14" fill="#F8F4EC"/>
+        <!-- fire glow -->
+        <ellipse cx="190" cy="415" rx="35" ry="12" fill="#D84820" opacity=".8" filter="url(#sf2)"/>
+        <ellipse cx="185" cy="408" rx="22" ry="16" fill="#E87030" opacity=".7" filter="url(#sf2)"/>
+        <ellipse cx="196" cy="406" rx="16" ry="18" fill="#F0A020" opacity=".65" filter="url(#sf2)"/>
+
+        <!-- MIRROR above fireplace -->
+        <rect x="152" y="265" width="76" height="72" rx="4" fill="#C8C0B0" opacity=".4" stroke="#D0C8B4" stroke-width="1"/>
+        <!-- ornate mirror top -->
+        <path d="M152,272 Q190,255 228,272" fill="none" stroke="#D0C8B4" stroke-width="1.5"/>
+        <ellipse cx="190" cy="268" rx="22" ry="8" fill="none" stroke="#D0C8B4" stroke-width="1"/>
+
+        <!-- mantel objects -->
+        <!-- vase with flowers -->
+        <rect x="168" y="275" width="16" height="20" rx="2" fill="#EDE5D0" opacity=".8"/>
+        <ellipse cx="176" cy="275" rx="12" ry="5" fill="#EDE5D0" opacity=".7"/>
+        <!-- flower stems -->
+        <line x1="172" y1="274" x2="168" y2="260" stroke="#8A9A60" stroke-width="1.2"/>
+        <line x1="176" y1="273" x2="176" y2="256" stroke="#8A9A60" stroke-width="1.2"/>
+        <line x1="180" y1="274" x2="184" y2="258" stroke="#8A9A60" stroke-width="1.2"/>
+        <circle cx="168" cy="258" r="5" fill="#D0B080" opacity=".7"/>
+        <circle cx="176" cy="254" r="5" fill="#F0C090" opacity=".7"/>
+        <circle cx="184" cy="256" r="4" fill="#D0B080" opacity=".65"/>
+
+        <!-- MUSTARD YELLOW CHAIR -->
+        <ellipse cx="108" cy="390" rx="30" ry="18" fill="#C89020" opacity=".8"/>
+        <rect x="84" y="345" width="48" height="46" rx="20" fill="#C89020" opacity=".85"/>
+        <rect x="78" y="370" width="12" height="24" rx="3" fill="#A87010" opacity=".7"/>
+        <rect x="110" y="385" width="12" height="22" rx="3" fill="#A87010" opacity=".65"/>
+        <!-- chair leg -->
+        <path d="M84,388 Q78,400 76,415" fill="none" stroke="#6A3A20" stroke-width="4" stroke-linecap="round"/>
+        <path d="M132,388 Q138,400 140,415" fill="none" stroke="#6A3A20" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- CACTUS small -->
+        <rect x="270" y="340" width="10" height="90" rx="3" fill="#8A9A60" opacity=".75"/>
+        <path d="M270,380 Q258,375 255,362" fill="none" stroke="#8A9A60" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+        <path d="M280,370 Q292,365 294,352" fill="none" stroke="#8A9A60" stroke-width="7" stroke-linecap="round" opacity=".65"/>
+
+        <!-- iron railing at top edge (staircase) -->
+        <rect x="290" y="118" width="70" height="6" rx="2" fill="#282020" opacity=".5"/>
+        <rect x="295" y="124" width="4" height="22" fill="#282020" opacity=".45"/>
+        <rect x="307" y="124" width="4" height="22" fill="#282020" opacity=".45"/>
+        <rect x="319" y="124" width="4" height="22" fill="#282020" opacity=".45"/>
+        <rect x="331" y="124" width="4" height="22" fill="#282020" opacity=".45"/>
+        <rect x="343" y="124" width="4" height="22" fill="#282020" opacity=".4"/>
+
+        <!-- floating identity words inside arch -->
+        <text x="110" y="170" font-family="'Caveat'" font-size="13" font-style="italic" fill="#A86050" opacity=".6" transform="rotate(-4,110,170)">感受</text>
+        <text x="238" y="180" font-family="'Caveat'" font-size="13" font-style="italic" fill="#8A9A60" opacity=".6" transform="rotate(3,238,180)">故事</text>
+        <text x="105" y="250" font-family="'Caveat'" font-size="12" font-style="italic" fill="#6A3A20" opacity=".55" transform="rotate(-2,105,250)">选择</text>
+        <text x="248" y="248" font-family="'Caveat'" font-size="12" font-style="italic" fill="#C89020" opacity=".6" transform="rotate(4,248,248)">成长</text>
+
+        <!-- frame border ornament -->
+        <rect x="20" y="20" width="340" height="440" fill="none" stroke="#D0C8B4" stroke-width="1" opacity=".5"/>
+        <rect x="26" y="26" width="328" height="428" fill="none" stroke="#D0C8B4" stroke-width=".5" opacity=".3"/>
       </svg>
     </div>
 
-    <div class="identity-cards">
-      <div class="id-card" onclick="toggleCard(this)">
-        <p class="id-tag">IDENTITY 01</p>
-        <h3 class="id-title">一个有感受的人</h3>
-        <p class="id-body">你会因为一首歌的某句歌词而突然红眼眶。AI 没有这个。你对美丑、善恶、荒诞有自己的感知——这就是你最不可替代的地方。</p>
-      </div>
-      <div class="id-card" onclick="toggleCard(this)">
-        <p class="id-tag">IDENTITY 02</p>
-        <h3 class="id-title">一个有故事的人</h3>
-        <p class="id-body">你经历过的挣扎、选择、失败和那些午夜的独处——那是你独有的数据集。没有任何模型训练过你的那份具体的人生。</p>
-      </div>
-      <div class="id-card" onclick="toggleCard(this)">
-        <p class="id-tag">IDENTITY 03</p>
-        <h3 class="id-title">一个还在生长的人</h3>
-        <p class="id-body">你并没有定型。职场的不得志，不是你的天花板，只是某一段路的弯道。真正的成长往往在你最迷茫的时候悄悄开始。</p>
-      </div>
-      <div class="id-card" onclick="toggleCard(this)">
-        <p class="id-tag">IDENTITY 04</p>
-        <h3 class="id-title">一个有选择权的人</h3>
-        <p class="id-body">即使现在的处境令人窒息——你依然拥有「开始」的权利。一个新的技能，一个新的认知，一个安静的决定，都可以是起点。</p>
+    <!-- gallery wall identity cards -->
+    <div>
+      <p style="font-size:11px;letter-spacing:.4em;color:var(--ink3);margin-bottom:28px;font-family:'Caveat',cursive;">点击展开 · CLICK TO OPEN</p>
+      <div class="gallery-wall">
+        <div class="gw-card" onclick="openCard(this)">
+          <p class="gw-num">NO. 01</p>
+          <h3 class="gw-title">一个有感受的人</h3>
+          <p class="gw-body">你会因为一首歌的某句歌词而突然红眼眶。AI 没有这个。你对美丑、荒诞有自己的感知——这是你最不可替代的地方。</p>
+        </div>
+        <div class="gw-card" onclick="openCard(this)">
+          <p class="gw-num">NO. 02</p>
+          <h3 class="gw-title">一个有故事的人</h3>
+          <p class="gw-body">你经历过的挣扎、失败、午夜的独处——是你独有的数据集。没有任何模型训练过你那份具体的人生。</p>
+        </div>
+        <div class="gw-card" onclick="openCard(this)">
+          <p class="gw-num">NO. 03</p>
+          <h3 class="gw-title">一个还在生长的人</h3>
+          <p class="gw-body">你并没有定型。职场的不得志不是你的天花板，只是某一段路的弯道。真正的成长往往在最迷茫的时候悄悄开始。</p>
+        </div>
+        <div class="gw-card" onclick="openCard(this)">
+          <p class="gw-num">NO. 04</p>
+          <h3 class="gw-title">一个有选择权的人</h3>
+          <p class="gw-body">即使处境令人窒息——你依然拥有「开始」的权利。一个新技能，一个安静的决定，都可以是起点。</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CH3 : 转折点 ═══ -->
-<section class="chapter turning-bg">
-  <p class="ch-label">— CHAPTER THREE · 停一停，呼吸一下</p>
-  <h2 class="ch-h2" style="text-align:center;">如果 AI 真的拿走了你的工作</h2>
-  <div class="question-zone">
-    <p class="big-question">那被解放出来的你，<br>最想做什么？</p>
+<!-- ══════════════════════════
+     CH3 — BREATH (sage)
+══════════════════════════ -->
+<section class="section ch3">
+  <div class="section-arch-top"></div>
+  <p class="sec-label">— CHAPTER THREE · 停一停，呼吸一下</p>
+  <h2 class="sec-h2" style="color:var(--warm);">如果 AI 解放了你的双手</h2>
 
-    <button class="breath-btn" id="breathBtn" onclick="startBreath()">
-      <span id="breath-text">点击<br>深呼吸</span>
-    </button>
-    <p style="text-align:center;font-size:12px;color:var(--ink3);letter-spacing:.2em;font-family:'Noto Sans SC',sans-serif;font-weight:100;" id="breath-guide">按住，跟着节奏</p>
+  <p class="bigq">你<em>最想做</em>的是什么？</p>
 
-    <div class="reflections" id="refl-zone">
-      <div class="refl" onclick="chooseRefl(this)">去学一件一直想学的事</div>
-      <div class="refl" onclick="chooseRefl(this)">终于开始那个搁置的项目</div>
-      <div class="refl" onclick="chooseRefl(this)">陪伴某个重要的人</div>
-      <div class="refl" onclick="chooseRefl(this)">认真想想我究竟喜欢什么</div>
-      <div class="refl" onclick="chooseRefl(this)">出发去一个从未去过的地方</div>
-      <div class="refl" onclick="chooseRefl(this)">只是好好休息，什么都不想</div>
-    </div>
-    <p id="refl-msg" style="text-align:center;margin-top:28px;font-family:'Ma Shan Zheng',cursive;font-size:20px;color:#b8786a;opacity:0;transition:opacity .8s;"></p>
+  <div class="breath-arch" id="bBtn" onclick="startBreath()">
+    <span id="btxt">点击<br>深呼吸</span>
   </div>
+  <p id="bguide">跟着节奏走</p>
+
+  <div class="refl-grid" id="rzone">
+    <div class="refl" onclick="chooseR(this)">去学一件一直想学的事</div>
+    <div class="refl" onclick="chooseR(this)">终于开始那个搁置的项目</div>
+    <div class="refl" onclick="chooseR(this)">陪伴某个重要的人</div>
+    <div class="refl" onclick="chooseR(this)">认真想想我喜欢什么</div>
+    <div class="refl" onclick="chooseR(this)">去一个从未去过的地方</div>
+    <div class="refl" onclick="chooseR(this)">好好休息，什么都不想</div>
+  </div>
+  <p id="rmsg"></p>
 </section>
 
-<!-- ═══ CH4 : 开花 ═══ -->
-<section class="chapter">
-  <p class="ch-label">— CHAPTER FOUR · 着手自己的成长</p>
-  <h2 class="ch-h2">早日开窍，是一种温柔的自救</h2>
-  <div class="bloom-zone">
-    <div class="bloom-text">
+<!-- TICKER 2 -->
+<div class="mold-ticker mold-ticker-b">
+  <div class="mt-inner" style="animation-direction:reverse;">
+    <span>你是有感受的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是有故事的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是还在生长的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是有选择权的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>早日开窍，是善待自己</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是有感受的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是有故事的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是还在生长的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>你是有选择权的人</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>早日开窍，是善待自己</span><span class="orn" style="color:var(--terra);">❧</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     CH4 — GROWTH (walnut)
+══════════════════════════ -->
+<section class="section ch4">
+  <div class="section-arch-top"></div>
+  <p class="sec-label">— CHAPTER FOUR · 着手自己的成长</p>
+  <h2 class="sec-h2">早日开窍，<br><span style="color:var(--mustard);">是一种温柔的自救</span></h2>
+
+  <div class="ch4-inner">
+    <div>
       <div class="bloom-lines">
-        <p>AI 时代，<span class="hi">最贵的不是技能</span>，<br>而是你对自己的了解。</p>
-        <p>不得志是信号，<br>告诉你：<span class="hi">此处不是你的全部</span>。</p>
-        <p>职场抑郁不是软弱，<br>是你太用力地<span class="hi">活在别人的剧本里</span>。</p>
-        <p>现在开始，<br>哪怕一小步——<span class="hi">都是你自己的故事</span>。</p>
+        <p>AI 时代，<em>最贵的不是技能</em>，<br>而是你对自己的了解。</p>
+        <p>不得志是信号，<br>告诉你：<em>此处不是你的全部</em>。</p>
+        <p>职场抑郁不是软弱，<br>是你太用力<em>活在别人的剧本里</em>。</p>
+        <p>哪怕一小步——<br><em>都是你自己的故事</em>。</p>
       </div>
 
-      <div class="growth-track" style="margin-top:52px;">
-        <p style="font-size:11px;letter-spacing:.4em;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;font-weight:100;margin-bottom:24px;">今天，你可以开始这些</p>
-        <div class="growth-item" onclick="toggleGrowth(this)">
-          <div class="g-circle">○</div>
-          <span class="g-label">写下一件你真正想做的事（不用告诉任何人）</span>
+      <div class="glist">
+        <p class="glist-label">TODAY · YOU CAN START</p>
+        <div class="gitem" onclick="toggleG(this)">
+          <div class="gdot">○</div>
+          <span class="glabel">写下一件你真正想做的事（不用告诉任何人）</span>
         </div>
-        <div class="growth-item" onclick="toggleGrowth(this)">
-          <div class="g-circle">○</div>
-          <span class="g-label">花 20 分钟学一个和现在工作无关的东西</span>
+        <div class="gitem" onclick="toggleG(this)">
+          <div class="gdot">○</div>
+          <span class="glabel">花 20 分钟学一个和工作无关的东西</span>
         </div>
-        <div class="growth-item" onclick="toggleGrowth(this)">
-          <div class="g-circle">○</div>
-          <span class="g-label">把「我没办法」换成「我还没试过」</span>
+        <div class="gitem" onclick="toggleG(this)">
+          <div class="gdot">○</div>
+          <span class="glabel">把「我没办法」换成「我还没试过」</span>
         </div>
-        <div class="growth-item" onclick="toggleGrowth(this)">
-          <div class="g-circle">○</div>
-          <span class="g-label">关掉消息，给自己一个小时的安静</span>
+        <div class="gitem" onclick="toggleG(this)">
+          <div class="gdot">○</div>
+          <span class="glabel">关掉通知，给自己一个小时的安静</span>
         </div>
-        <div class="growth-item" onclick="toggleGrowth(this)">
-          <div class="g-circle">○</div>
-          <span class="g-label">用 AI 工具把一个搁置的想法原型化</span>
+        <div class="gitem" onclick="toggleG(this)">
+          <div class="gdot">○</div>
+          <span class="glabel">用 AI 工具把搁置的想法先原型化</span>
         </div>
       </div>
     </div>
 
-    <!-- bloom illustration: figure stepping into light / blooming -->
-    <div class="bloom-illo">
-      <svg viewBox="0 0 360 460" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bloomGlow" cx="50%" cy="60%" r="55%">
-            <stop offset="0%" stop-color="#e8c4b8" stop-opacity=".35"/>
-            <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="bloomGlow2" cx="50%" cy="30%" r="40%">
-            <stop offset="0%" stop-color="#d4e0d0" stop-opacity=".3"/>
-            <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <ellipse cx="180" cy="260" rx="150" ry="180" fill="url(#bloomGlow)"/>
-        <ellipse cx="180" cy="130" rx="100" ry="120" fill="url(#bloomGlow2)"/>
+    <!-- ch4 illustration: triple arches (like image 3) -->
+    <div class="ch4-illo">
+      <svg viewBox="0 0 380 480" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <!-- background -->
+        <rect x="0" y="0" width="380" height="480" fill="#3D1E0A" opacity=".3"/>
+        <rect x="0" y="0" width="380" height="480" fill="#F5EDE0" opacity=".05"/>
 
-        <!-- ground line -->
-        <line x1="40" y1="400" x2="320" y2="400" stroke="#d4b8a8" stroke-width=".7" opacity=".4"/>
+        <!-- TERRACOTTA TOP BAND -->
+        <rect x="0" y="0" width="380" height="90" fill="#A86050" opacity=".8"/>
 
-        <!-- growing plant / tree from bottom — large, central -->
-        <!-- trunk -->
-        <path d="M180,400 Q178,360 180,320 Q182,280 178,240" fill="none" stroke="#8a6a58" stroke-width="3" stroke-linecap="round" opacity=".6"/>
-        <!-- main branches -->
-        <path d="M180,320 Q155,295 135,270" fill="none" stroke="#8a6a58" stroke-width="2" stroke-linecap="round" opacity=".5"/>
-        <path d="M180,300 Q205,278 225,255" fill="none" stroke="#8a6a58" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
-        <path d="M180,270 Q165,248 155,228" fill="none" stroke="#8a6a58" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
-        <path d="M180,260 Q198,240 215,222" fill="none" stroke="#8a6a58" stroke-width="1.2" stroke-linecap="round" opacity=".4"/>
-        <!-- tip -->
-        <path d="M178,240 Q174,218 176,200" fill="none" stroke="#8a6a58" stroke-width="1" stroke-linecap="round" opacity=".4"/>
+        <!-- TRIPLE ARCHES wall -->
+        <!-- arch left -->
+        <path d="M20,340 L20,180 Q20,100 85,100 Q150,100 150,180 L150,340" fill="none" stroke="#EDE5D0" stroke-width="2.5"/>
+        <path d="M30,340 L30,183 Q30,112 85,112 Q140,112 140,183 L140,340" fill="none" stroke="#EDE5D0" stroke-width="1"/>
+        <path d="M30,340 L30,183 Q30,112 85,112 Q140,112 140,183 L140,340 Z" fill="rgba(237,229,208,.15)"/>
+        <!-- arch centre -->
+        <path d="M115,340 L115,160 Q115,68 190,68 Q265,68 265,160 L265,340" fill="none" stroke="#EDE5D0" stroke-width="2.8"/>
+        <path d="M126,340 L126,163 Q126,80 190,80 Q254,80 254,163 L254,340" fill="none" stroke="#EDE5D0" stroke-width="1.2"/>
+        <path d="M126,340 L126,163 Q126,80 190,80 Q254,80 254,163 L254,340 Z" fill="rgba(237,229,208,.18)"/>
+        <!-- arch right -->
+        <path d="M230,340 L230,180 Q230,100 295,100 Q360,100 360,180 L360,340" fill="none" stroke="#EDE5D0" stroke-width="2.5"/>
+        <path d="M240,340 L240,183 Q240,112 295,112 Q350,112 350,183 L350,340" fill="none" stroke="#EDE5D0" stroke-width="1"/>
+        <path d="M240,340 L240,183 Q240,112 295,112 Q350,112 350,183 L350,340 Z" fill="rgba(237,229,208,.15)"/>
 
-        <!-- blooms — peony-style, at branch tips -->
-        <!-- bloom 1 - large, rose -->
-        <ellipse cx="132" cy="265" rx="18" ry="14" fill="#e8c4b8" opacity=".7"/>
-        <ellipse cx="132" cy="265" rx="12" ry="9"  fill="#d4a898" opacity=".65"/>
-        <ellipse cx="132" cy="265" rx="7"  ry="5"  fill="#c4988a" opacity=".6"/>
-        <ellipse cx="138" cy="258" rx="8"  ry="6"  fill="#e8c4b8" opacity=".5" transform="rotate(-15,138,258)"/>
-        <ellipse cx="124" cy="260" rx="7"  ry="5"  fill="#edd8d0" opacity=".6" transform="rotate(10,124,260)"/>
+        <!-- arch top ornaments — rosettes -->
+        <circle cx="85"  cy="100" r="10" fill="#EDE5D0" opacity=".6" stroke="#D0C8B4" stroke-width="1"/>
+        <circle cx="85"  cy="100" r="5"  fill="#EDE5D0" opacity=".7" stroke="#D0C8B4" stroke-width=".8"/>
+        <circle cx="190" cy="68"  r="12" fill="#EDE5D0" opacity=".7" stroke="#D0C8B4" stroke-width="1.2"/>
+        <circle cx="190" cy="68"  r="6"  fill="#EDE5D0" opacity=".75" stroke="#D0C8B4" stroke-width=".8"/>
+        <circle cx="295" cy="100" r="10" fill="#EDE5D0" opacity=".6" stroke="#D0C8B4" stroke-width="1"/>
+        <circle cx="295" cy="100" r="5"  fill="#EDE5D0" opacity=".7" stroke="#D0C8B4" stroke-width=".8"/>
 
-        <!-- bloom 2 - sage -->
-        <ellipse cx="224" cy="252" rx="16" ry="12" fill="#b8c8b0" opacity=".65"/>
-        <ellipse cx="224" cy="252" rx="10" ry="8"  fill="#9aab98" opacity=".6"/>
-        <ellipse cx="224" cy="252" rx="5"  ry="4"  fill="#8a9b88" opacity=".55"/>
-        <ellipse cx="230" cy="246" rx="7"  ry="5"  fill="#b8c8b0" opacity=".45" transform="rotate(-10,230,246)"/>
+        <!-- IRON RAILING — balcony -->
+        <rect x="0" y="280" width="380" height="8" rx="2" fill="#282020" opacity=".7"/>
+        <!-- balustrade posts -->
+        <rect x="18"  y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="36"  y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="54"  y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="72"  y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="90"  y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="108" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="130" y="288" width="5" height="52" fill="#282020" opacity=".55"/>
+        <rect x="152" y="288" width="5" height="52" fill="#282020" opacity=".55"/>
+        <rect x="174" y="288" width="5" height="52" fill="#282020" opacity=".55"/>
+        <rect x="196" y="288" width="5" height="52" fill="#282020" opacity=".55"/>
+        <rect x="218" y="288" width="5" height="52" fill="#282020" opacity=".55"/>
+        <rect x="240" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="262" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="284" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="306" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="328" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <rect x="350" y="288" width="5" height="52" fill="#282020" opacity=".6"/>
+        <!-- diamond ornaments on posts -->
+        <rect x="22"  y="310" width="9" height="9" fill="#282020" opacity=".7" transform="rotate(45,26.5,314.5)"/>
+        <rect x="94"  y="310" width="9" height="9" fill="#282020" opacity=".7" transform="rotate(45,98.5,314.5)"/>
+        <rect x="178" y="310" width="9" height="9" fill="#282020" opacity=".65" transform="rotate(45,182.5,314.5)"/>
+        <rect x="264" y="310" width="9" height="9" fill="#282020" opacity=".7" transform="rotate(45,268.5,314.5)"/>
+        <rect x="354" y="310" width="9" height="9" fill="#282020" opacity=".7" transform="rotate(45,358.5,314.5)"/>
+        <rect x="0" y="338" width="380" height="6" rx="2" fill="#282020" opacity=".6"/>
 
-        <!-- bloom 3 - lavender, small -->
-        <ellipse cx="154" cy="224" rx="12" ry="9"  fill="#c8b8d8" opacity=".6"/>
-        <ellipse cx="154" cy="224" rx="7"  ry="5"  fill="#b0a0c8" opacity=".55"/>
+        <!-- crystal chandelier — centre top -->
+        <line x1="190" y1="0"  x2="190" y2="30" stroke="#C87030" stroke-width="1.5"/>
+        <ellipse cx="190" cy="36" rx="24" ry="5" fill="none" stroke="#C87030" stroke-width="1.2"/>
+        <path d="M177,36 Q170,52 167,65" fill="none" stroke="#C87030" stroke-width="1" stroke-linecap="round"/>
+        <path d="M203,36 Q210,52 213,65" fill="none" stroke="#C87030" stroke-width="1" stroke-linecap="round"/>
+        <path d="M184,36 Q181,54 179,68" fill="none" stroke="#C87030" stroke-width=".8"/>
+        <path d="M196,36 Q199,54 201,68" fill="none" stroke="#C87030" stroke-width=".8"/>
+        <circle cx="167" cy="67" r="3" fill="#C87030" opacity=".8"/>
+        <circle cx="213" cy="67" r="3" fill="#C87030" opacity=".8"/>
+        <circle cx="179" cy="70" r="2.5" fill="#C87030" opacity=".7"/>
+        <circle cx="201" cy="70" r="2.5" fill="#C87030" opacity=".7"/>
 
-        <!-- bloom 4 - blush, smallest -->
-        <ellipse cx="214" cy="218" rx="10" ry="8"  fill="#edd8d0" opacity=".6"/>
-        <ellipse cx="214" cy="218" rx="6"  ry="4"  fill="#e8c4b8" opacity=".55"/>
+        <!-- gallery pictures on wall (inside main arch) -->
+        <rect x="152" y="165" width="36" height="46" fill="#C0B0A0" opacity=".5" rx="1"/>
+        <rect x="155" y="168" width="30" height="40" fill="#D4C8B0" opacity=".5" rx="1"/>
+        <rect x="196" y="165" width="30" height="38" fill="#A0B090" opacity=".45" rx="1"/>
+        <rect x="199" y="168" width="24" height="32" fill="#B0C0A0" opacity=".45" rx="1"/>
+        <rect x="152" y="218" width="28" height="36" fill="#B0A898" opacity=".4" rx="1"/>
+        <rect x="155" y="221" width="22" height="30" fill="#C0B8A8" opacity=".4" rx="1"/>
 
-        <!-- tip bloom -->
-        <ellipse cx="176" cy="197" rx="11" ry="8"  fill="#e8c4b8" opacity=".55"/>
-        <ellipse cx="176" cy="197" rx="6"  ry="4"  fill="#d4a898" opacity=".5"/>
+        <!-- sage green sofa hint bottom -->
+        <rect x="85" y="350" width="210" height="60" rx="8" fill="#8A9A60" opacity=".55"/>
+        <rect x="90"  y="340" width="50" height="22" rx="5" fill="#8A9A60" opacity=".65"/>
+        <rect x="180" y="340" width="50" height="22" rx="5" fill="#8A9A60" opacity=".65"/>
+        <!-- cushions -->
+        <rect x="108" y="345" width="28" height="22" rx="4" fill="#A86050" opacity=".5"/>
+        <rect x="178" y="345" width="26" height="22" rx="4" fill="#C89020" opacity=".45"/>
+        <rect x="244" y="345" width="26" height="22" rx="4" fill="#A86050" opacity=".45"/>
 
-        <!-- leaves -->
-        <ellipse cx="168" cy="285" rx="14" ry="7"  fill="#9aab98" opacity=".5" transform="rotate(-30,168,285)"/>
-        <ellipse cx="196" cy="272" rx="12" ry="6"  fill="#9aab98" opacity=".45" transform="rotate(20,196,272)"/>
-        <ellipse cx="172" cy="248" rx="11" ry="5"  fill="#b8c8b0" opacity=".4" transform="rotate(-15,172,248)"/>
+        <!-- floor line -->
+        <line x1="0" y1="415" x2="380" y2="415" stroke="#D0C8B4" stroke-width=".8" opacity=".5"/>
+        <!-- herringbone floor hint -->
+        <path d="M0,415 L20,435 M10,415 L30,435 M20,415 L40,435 M30,415 L50,435 M40,415 L60,435 M50,415 L70,435 M60,415 L80,435 M70,415 L90,435" stroke="#D0C8B4" stroke-width=".5" opacity=".3"/>
 
-        <!-- figure standing beside, small, looking up -->
-        <ellipse cx="280" cy="362" rx="10" ry="12" fill="#e8d4c4" opacity=".65" filter="url(#soft)"/>
-        <!-- hair -->
-        <ellipse cx="280" cy="352" rx="11" ry="8"  fill="#6a5248" opacity=".5" filter="url(#soft)"/>
-        <!-- body -->
-        <path d="M272,374 Q276,388 278,400" fill="none" stroke="#d4c0b4" stroke-width="10" stroke-linecap="round" opacity=".5" filter="url(#soft)"/>
-        <!-- arm raised toward tree -->
-        <path d="M274,380 Q260,365 248,350" fill="none" stroke="#d4c0b4" stroke-width="6" stroke-linecap="round" opacity=".4" filter="url(#soft)"/>
-
-        <!-- falling petals around -->
-        <ellipse cx="80"  cy="180" rx="5"  ry="8"  fill="#e8c4b8" opacity=".35" transform="rotate(25,80,180)"/>
-        <ellipse cx="310" cy="200" rx="4"  ry="7"  fill="#c8b8d8" opacity=".3"  transform="rotate(-20,310,200)"/>
-        <ellipse cx="60"  cy="300" rx="3"  ry="5"  fill="#b8c8b0" opacity=".3"  transform="rotate(15,60,300)"/>
-        <ellipse cx="320" cy="310" rx="5"  ry="8"  fill="#e8c4b8" opacity=".25" transform="rotate(-35,320,310)"/>
-        <ellipse cx="100" cy="130" rx="4"  ry="6"  fill="#c8b8d8" opacity=".28" transform="rotate(5,100,130)"/>
-        <ellipse cx="290" cy="140" rx="3"  ry="5"  fill="#edd8d0" opacity=".3"  transform="rotate(-10,290,140)"/>
-
-        <!-- soft light rays from top -->
-        <line x1="180" y1="0"   x2="130" y2="200" stroke="rgba(255,248,235,.5)" stroke-width="15" opacity=".3" filter="url(#softer)"/>
-        <line x1="200" y1="0"   x2="220" y2="180" stroke="rgba(255,248,235,.4)" stroke-width="10" opacity=".25" filter="url(#softer)"/>
+        <!-- outer frame -->
+        <rect x="2" y="2" width="376" height="476" fill="none" stroke="#D0C8B4" stroke-width="1" opacity=".35"/>
       </svg>
     </div>
   </div>
 </section>
 
-<!-- ═══ ENDING ═══ -->
+<!-- ══════════════════════════
+     ENDING — MOOD CARD JOURNAL
+══════════════════════════ -->
 <section class="ending">
-  <!-- bg illustration: wide field, figure small, open sky -->
-  <div class="ending-illo">
-    <svg viewBox="0 0 1200 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="skyEnd" cx="50%" cy="20%" r="80%">
-          <stop offset="0%" stop-color="#d4e0e8" stop-opacity=".4"/>
-          <stop offset="100%" stop-color="#f7f3ee" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="groundEnd" cx="50%" cy="100%" r="60%">
-          <stop offset="0%" stop-color="#e8c4b8" stop-opacity=".2"/>
-          <stop offset="100%" stop-color="#f0e8de" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="1200" height="600" fill="url(#skyEnd)"/>
-      <rect width="1200" height="600" fill="url(#groundEnd)"/>
-      <!-- horizon line -->
-      <line x1="0" y1="420" x2="1200" y2="420" stroke="#d4b8a8" stroke-width=".6" opacity=".3"/>
-      <!-- distant hills soft -->
-      <path d="M0,420 Q200,380 400,390 Q600,400 800,385 Q1000,370 1200,390 L1200,600 L0,600 Z" fill="#e8d8d0" opacity=".25"/>
-      <!-- scattered flowers in field -->
-      <ellipse cx="150" cy="440" rx="6"  ry="9"  fill="#e8c4b8" opacity=".4" transform="rotate(15,150,440)"/>
-      <ellipse cx="250" cy="460" rx="5"  ry="7"  fill="#b8c8b0" opacity=".35" transform="rotate(-10,250,460)"/>
-      <ellipse cx="400" cy="445" rx="4"  ry="6"  fill="#c8b8d8" opacity=".3"  transform="rotate(5,400,445)"/>
-      <ellipse cx="550" cy="455" rx="5"  ry="8"  fill="#e8c4b8" opacity=".35" transform="rotate(-20,550,455)"/>
-      <ellipse cx="700" cy="448" rx="4"  ry="7"  fill="#b8c8b0" opacity=".3"  transform="rotate(12,700,448)"/>
-      <ellipse cx="850" cy="460" rx="6"  ry="9"  fill="#edd8d0" opacity=".35" transform="rotate(-8,850,460)"/>
-      <ellipse cx="1000" cy="442" rx="5" ry="7"  fill="#c8b8d8" opacity=".3"  transform="rotate(18,1000,442)"/>
-      <ellipse cx="1100" cy="455" rx="4" ry="6"  fill="#e8c4b8" opacity=".28" transform="rotate(-15,1100,455)"/>
-      <!-- small figure far right, walking -->
-      <ellipse cx="1050" cy="413" rx="6"  ry="7"  fill="#d4c0b4" opacity=".5" filter="url(#soft)"/>
-      <ellipse cx="1050" cy="406" rx="7"  ry="5"  fill="#8a6a58" opacity=".4" filter="url(#soft)"/>
-      <path d="M1047,420 L1044,434" fill="none" stroke="#d4c0b4" stroke-width="5" stroke-linecap="round" opacity=".4" filter="url(#soft)"/>
-      <path d="M1053,420 L1056,434" fill="none" stroke="#d4c0b4" stroke-width="4" stroke-linecap="round" opacity=".35" filter="url(#soft)"/>
-      <!-- sun / moon halo -->
-      <circle cx="600" cy="120" r="60" fill="rgba(255,248,235,.3)" filter="url(#softer)"/>
-      <circle cx="600" cy="120" r="40" fill="rgba(255,248,235,.25)" filter="url(#softer)"/>
+
+  <div class="ending-header">
+    <p class="sec-label">— EPILOGUE · 今天，你感觉怎么样</p>
+    <h2>写下此刻，<em>留给未来的自己</em></h2>
+  </div>
+
+  <!-- THE MOOD CARD -->
+  <div class="mood-card-wrap">
+    <div class="mood-card">
+
+      <!-- stamp -->
+      <div class="card-stamp">
+        <div class="stamp-inner">🪴</div>
+        <div class="stamp-label">2026</div>
+      </div>
+
+      <p class="card-date" id="cardDate"></p>
+      <h3 class="card-title">今日心情卡片</h3>
+      <p class="card-subtitle">选择你的状态，写下任何想说的话</p>
+
+      <!-- MOOD PICKER — 5 arch buttons -->
+      <div class="mood-picker" id="moodPicker">
+        <button class="mood-btn" data-mood="🌱" onclick="pickMood(this)">
+          <span class="mood-emoji">🌱</span>
+          <span class="mood-word">萌芽</span>
+        </button>
+        <button class="mood-btn" data-mood="☁️" onclick="pickMood(this)">
+          <span class="mood-emoji">☁️</span>
+          <span class="mood-word">迷雾</span>
+        </button>
+        <button class="mood-btn" data-mood="🕯" onclick="pickMood(this)">
+          <span class="mood-emoji">🕯</span>
+          <span class="mood-word">微光</span>
+        </button>
+        <button class="mood-btn" data-mood="🌿" onclick="pickMood(this)">
+          <span class="mood-emoji">🌿</span>
+          <span class="mood-word">平静</span>
+        </button>
+        <button class="mood-btn" data-mood="✨" onclick="pickMood(this)">
+          <span class="mood-emoji">✨</span>
+          <span class="mood-word">闪光</span>
+        </button>
+      </div>
+
+      <!-- TEXT AREA -->
+      <textarea class="card-textarea" id="cardText"
+        placeholder="今天发生了什么？有什么感受？或者只是想说一句话给自己听……"
+        maxlength="300"
+        oninput="updateChar()"></textarea>
+
+      <div class="card-footer-row">
+        <span class="char-count"><span id="charNum">0</span> / 300</span>
+        <button class="save-btn" onclick="saveEntry()">封存这一刻 ❧</button>
+      </div>
+      <p class="save-flash" id="saveFlash"></p>
+    </div>
+  </div>
+
+  <!-- ENTRIES LIST -->
+  <div class="entries-zone">
+    <div class="entries-header">
+      <span class="entries-title">PAST ENTRIES · 过去的记录</span>
+      <button class="clear-btn" onclick="clearAll()">清空全部</button>
+    </div>
+    <div class="entries-list" id="entriesList">
+      <p class="entries-empty">还没有记录。写下你的第一张心情卡片吧。</p>
+    </div>
+  </div>
+
+  <!-- final quote -->
+  <div class="end-quote-final">
+    <p id="EQ">你存在的意义，不是<em>完成任务</em>，<br>而是<em>成为你自己</em>。</p>
+    <p class="sig" id="ES">写给每一个此刻还在熬的你 · 2026</p>
+  </div>
+
+  <div class="end-orn" id="EP">
+    <svg width="100" height="32" viewBox="0 0 100 32">
+      <text x="50" y="22" text-anchor="middle" font-family="'Caveat'" font-size="28" font-style="italic" fill="var(--ink3)" opacity=".5">❧ ❧ ❧</text>
     </svg>
   </div>
 
-  <p class="ending-quote" id="endQ">
-    你存在的意义，<br>
-    不是<em>完成任务</em>，<br>
-    而是<em>成为你自己</em>。<br>
-    AI 时代，恰恰给了你<em>这个机会</em>。
-  </p>
-  <p class="ending-sig" id="endSig">写给每一个此刻还在熬的你 · 2025</p>
-  <div class="ending-seal" id="endSeal">
-    <svg width="70" height="70" viewBox="0 0 70 70">
-      <rect x="6" y="6" width="58" height="58" rx="4" fill="none" stroke="#b8786a" stroke-width="1.2" opacity=".5"/>
-      <rect x="11" y="11" width="48" height="48" rx="2" fill="none" stroke="#b8786a" stroke-width=".5" opacity=".3"/>
-      <text x="35" y="42" text-anchor="middle" font-family="'Ma Shan Zheng',cursive" font-size="22" fill="#b8786a" opacity=".65">醒</text>
-    </svg>
-  </div>
 </section>
 
-<!-- TICKER BOTTOM -->
-<div class="ticker-wrap">
-  <div class="ticker-inner" style="animation-direction:reverse;">
-    <span>你是有感受的人</span><span class="dot">·</span>
-    <span>你是有故事的人</span><span class="dot">·</span>
-    <span>你是还在生长的人</span><span class="dot">·</span>
-    <span>你是有选择权的人</span><span class="dot">·</span>
-    <span>早日开窍，是一种善待自己</span><span class="dot">·</span>
-    <span>你是有感受的人</span><span class="dot">·</span>
-    <span>你是有故事的人</span><span class="dot">·</span>
-    <span>你是还在生长的人</span><span class="dot">·</span>
-    <span>你是有选择权的人</span><span class="dot">·</span>
-    <span>早日开窍，是一种善待自己</span><span class="dot">·</span>
+<div class="mold-ticker mold-ticker-b" style="border-color:var(--terra2);">
+  <div class="mt-inner" style="animation-direction:reverse;">
+    <span>打工人的圆拱故事</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>法式色彩 · 存在的意义</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>AI 时代的温柔自救</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>每一个弯道都是转机</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>打工人的圆拱故事</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>法式色彩 · 存在的意义</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>AI 时代的温柔自救</span><span class="orn" style="color:var(--terra);">❧</span>
+    <span>每一个弯道都是转机</span><span class="orn" style="color:var(--terra);">❧</span>
   </div>
 </div>
 
 <footer>
-  <span>打工人存在意义 · 2025</span>
-  <span>VIBE CODING WITH LOVE</span>
+  <span>打工人存在意义 · FRENCH ECLECTIC · 2026</span>
+  <span>VIBE CODING WITH LOVE ❧</span>
 </footer>
 
 <script>
-/* ─── cursor ─── */
-const cur = document.getElementById('cur');
-let mx=0,my=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-});
-document.querySelectorAll('button,.id-card,.refl,.g-circle,.cta-btn').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
-  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+/* cursor */
+const cur=document.getElementById('cur');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+document.querySelectorAll('button,.gw-card,.refl,.gitem,.mood-btn,.save-btn,.clear-btn,.entry-del').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('h'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('h'));
 });
 
-/* ─── progress ─── */
+/* progress + nav */
+const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{
   const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
   document.getElementById('prog').style.width=pct+'%';
+  nav.classList.toggle('scrolled',window.scrollY>80);
 });
 
-/* ─── hero parallax ─── */
-const heroSvg=document.getElementById('hero-svg');
-document.addEventListener('mousemove',e=>{
-  const rx=(e.clientX/window.innerWidth-.5)*12;
-  const ry=(e.clientY/window.innerHeight-.5)*8;
-  heroSvg.style.transform=`perspective(800px) rotateY(${rx}deg) rotateX(${-ry}deg)`;
-});
-
-/* ─── IntersectionObserver ─── */
+/* IO */
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      // stagger children
-      ['w-cell','id-card','refl','growth-item','bloom-lines p'].forEach(cls=>{
-        e.target.querySelectorAll('.'+cls.replace(' ','.')).forEach((el,i)=>{
-          el.style.transitionDelay=i*.12+'s';
-          el.classList.add('in');
-        });
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    ['.stat-arch-card','.gw-card','.refl','.gitem','.bloom-lines p'].forEach(s=>{
+      e.target.querySelectorAll(s).forEach((el,i)=>{
+        el.style.transitionDelay=i*.13+'s';
+        setTimeout(()=>el.classList.add('in'),i*130+80);
       });
-    }
+    });
   });
-},{threshold:.12});
+},{threshold:.1});
 
 document.querySelectorAll(
-  '.chapter,.w-cell,.weight-quote,.id-card,.refl,.growth-item,.bloom-lines p,#endQ,#endSig,#endSeal,.div-line'
+  '.section,.sec-label,.sec-h2,.stat-arch-card,.ch1-quote,.gw-card,.bigq,.refl,.gitem,.bloom-lines p,#EQ,#ES,#EP'
 ).forEach(el=>io.observe(el));
 
-/* ─── identity card toggle ─── */
-function toggleCard(el){
-  document.querySelectorAll('.id-card').forEach(c=>c.classList.remove('active'));
+/* gallery cards */
+function openCard(el){
+  document.querySelectorAll('.gw-card').forEach(c=>c.classList.remove('active'));
   el.classList.add('active');
 }
 
-/* ─── breath button ─── */
-let breathing=false,bTimer=null;
-const btxt=document.getElementById('breath-text');
-const bguide=document.getElementById('breath-guide');
-const phases=['吸气…','屏息…','呼气…','停顿…'];
-const durations=[4000,2000,6000,2000];
-let phase=0;
+/* breath */
+let breathing=false,ph=0;
+const phases=['吸气…','屏息…','呼气…','停顿…'],durs=[4000,2000,6000,2000];
+const bt=document.getElementById('btxt'),bg=document.getElementById('bguide');
 function startBreath(){
-  if(breathing)return;
-  breathing=true;
-  btxt.style.opacity='0';
-  runPhase();
-}
-function runPhase(){
-  setTimeout(()=>{
-    btxt.style.opacity='1';
-    btxt.innerHTML=phases[phase];
-    bguide.textContent=`${(durations[phase]/1000).toFixed(0)} 秒`;
-    bTimer=setTimeout(()=>{
-      phase=(phase+1)%4;
-      btxt.style.opacity='0';
-      setTimeout(runPhase,400);
-    },durations[phase]);
-  },100);
+  if(breathing)return;breathing=true;
+  function run(){
+    bt.style.opacity='0';
+    setTimeout(()=>{bt.innerHTML=phases[ph];bg.textContent=(durs[ph]/1000)+'秒';bt.style.opacity='1';
+      setTimeout(()=>{ph=(ph+1)%4;run();},durs[ph]);},300);
+  }run();
 }
 
-/* ─── reflections ─── */
-const msgs={
-  '去学一件一直想学的事':'那就从今天起，查一个课程，哪怕只看第一集。',
-  '终于开始那个搁置的项目':'打开文件，写下第一行。开始比完美更重要。',
+/* reflections */
+const msgs={'去学一件一直想学的事':'从今天查一个课，哪怕只看第一集。',
+  '终于开始那个搁置的项目':'打开文件，写第一行。开始比完美更重要。',
   '陪伴某个重要的人':'有些时间，后来才知道是最珍贵的。',
-  '认真想想我究竟喜欢什么':'这是你给自己最好的作业。慢慢想，不急。',
-  '出发去一个从未去过的地方':'陌生的地方会给你陌生的自己。',
-  '只是好好休息，什么都不想':'这也是一种生产力。你值得。'
-};
-function chooseRefl(el){
+  '认真想想我喜欢什么':'这是你给自己最好的作业，慢慢来，不急。',
+  '去一个从未去过的地方':'陌生的地方会给你陌生的自己。',
+  '好好休息，什么都不想':'这也是一种生产力，你值得。'};
+function chooseR(el){
   document.querySelectorAll('.refl').forEach(r=>r.classList.remove('chosen'));
   el.classList.add('chosen');
-  const msg=document.getElementById('refl-msg');
-  msg.textContent=msgs[el.textContent.trim()]||'';
-  msg.style.opacity='1';
+  const m=document.getElementById('rmsg');
+  m.textContent=msgs[el.textContent.trim()]||'';m.style.opacity='1';
 }
 
-/* ─── growth tracker ─── */
-function toggleGrowth(item){
-  const circle=item.querySelector('.g-circle');
-  const isDone=circle.classList.toggle('done');
-  circle.textContent=isDone?'✓':'○';
+/* grow list */
+function toggleG(item){
+  const d=item.querySelector('.gdot');
+  const done=item.classList.toggle('done');
+  d.textContent=done?'✓':'○';
 }
 
-/* ─── floating petals canvas ─── */
-const canvas=document.getElementById('petals');
-const ctx=canvas.getContext('2d');
-let petals=[];
+/* ══ MOOD CARD JOURNAL ══ */
+// date
+const now=new Date();
+const dateStr=now.toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+document.getElementById('cardDate').textContent=dateStr;
 
-function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-resize(); window.addEventListener('resize',resize);
+let selectedMood='';
 
-const colors=['#e8c4b8','#c8b8d8','#b8c8b0','#edd8d0','#c0b4cc','#d4e0d0'];
-function spawnPetal(){
-  petals.push({
-    x:Math.random()*canvas.width,
-    y:-20,
-    r:Math.random()*4+2,
-    rx:Math.random()*7+4,
-    ry:Math.random()*5+2,
-    rot:Math.random()*Math.PI*2,
-    drot:((Math.random()-.5)*.02),
-    vx:(Math.random()-.5)*.6,
-    vy:Math.random()*.5+.3,
-    color:colors[Math.floor(Math.random()*colors.length)],
-    alpha:Math.random()*.25+.1
+function pickMood(btn){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  selectedMood=btn.dataset.mood;
+}
+
+function updateChar(){
+  const t=document.getElementById('cardText');
+  document.getElementById('charNum').textContent=t.value.length;
+}
+
+// load from localStorage
+function loadEntries(){
+  try{
+    const raw=localStorage.getItem('mood_entries');
+    return raw?JSON.parse(raw):[];
+  }catch(e){return[];}
+}
+function saveEntries(arr){
+  try{localStorage.setItem('mood_entries',JSON.stringify(arr));}catch(e){}
+}
+
+function renderEntries(){
+  const list=document.getElementById('entriesList');
+  const entries=loadEntries();
+  if(!entries.length){
+    list.innerHTML='<p class="entries-empty">还没有记录。写下你的第一张心情卡片吧。</p>';
+    return;
+  }
+  list.innerHTML=entries.slice().reverse().map((e,i)=>`
+    <div class="entry-card" style="animation-delay:${i*.07}s">
+      <div class="entry-top">
+        <div class="entry-meta">
+          <div class="entry-mood-badge">${e.mood||'🌿'}</div>
+          <span>${e.date}</span>
+        </div>
+        <button class="entry-del" onclick="deleteEntry('${e.id}')" title="删除">✕</button>
+      </div>
+      <p class="entry-text">${escHtml(e.text)}</p>
+    </div>
+  `).join('');
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function saveEntry(){
+  const text=document.getElementById('cardText').value.trim();
+  const flash=document.getElementById('saveFlash');
+  if(!text){
+    flash.textContent='请先写点什么 ✦';flash.style.opacity='1';
+    setTimeout(()=>flash.style.opacity='0',2000);return;
+  }
+  const entries=loadEntries();
+  const entry={
+    id:Date.now().toString(),
+    date:dateStr,
+    mood:selectedMood||'🌿',
+    text
+  };
+  entries.push(entry);
+  saveEntries(entries);
+  document.getElementById('cardText').value='';
+  document.getElementById('charNum').textContent='0';
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('sel'));
+  selectedMood='';
+  renderEntries();
+  flash.textContent='已封存 ❧ 写给未来的你';flash.style.opacity='1';
+  setTimeout(()=>flash.style.opacity='0',2500);
+}
+
+function deleteEntry(id){
+  const entries=loadEntries().filter(e=>e.id!==id);
+  saveEntries(entries);
+  renderEntries();
+}
+
+function clearAll(){
+  if(!confirm('确认清空所有记录？'))return;
+  localStorage.removeItem('mood_entries');
+  renderEntries();
+}
+
+// init
+renderEntries();
+</script>
+
+<!-- ══════════════════════════
+     MUSIC PLAYER WIDGET
+══════════════════════════ -->
+<style>
+/* floating music player — arch-shaped, bottom right */
+#musicPlayer{
+  position:fixed;bottom:36px;right:36px;z-index:6000;
+  width:160px;
+  filter:drop-shadow(0 8px 24px rgba(30,20,16,.18));
+  transition:transform .3s;
+}
+#musicPlayer:hover{transform:translateY(-3px);}
+
+/* arch top + body */
+.mp-arch{
+  background:var(--warm);
+  border:1.5px solid var(--cream3);
+  border-radius:80px 80px 12px 12px;
+  padding:20px 16px 18px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  box-shadow:inset 0 0 0 6px var(--cream), inset 0 0 0 7.5px var(--cream3);
+  position:relative;overflow:hidden;
+}
+
+/* terracotta bar at top */
+.mp-arch::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--terra),var(--mustard),var(--terra));
+  border-radius:80px 80px 0 0;
+}
+
+.mp-label{
+  font-size:9px;letter-spacing:.45em;color:var(--ink3);
+  font-family:'Caveat',cursive;font-style:italic;
+  text-align:center;line-height:1.6;
+}
+
+/* waveform animation bars */
+.mp-wave{
+  display:flex;align-items:flex-end;gap:3px;height:20px;
+}
+.mp-bar{
+  width:3px;background:var(--terra);border-radius:2px;opacity:.6;
+  animation:waveAnim 1.2s ease-in-out infinite;
+}
+.mp-bar:nth-child(1){height:6px; animation-delay:0s;}
+.mp-bar:nth-child(2){height:12px;animation-delay:.15s;}
+.mp-bar:nth-child(3){height:18px;animation-delay:.3s;}
+.mp-bar:nth-child(4){height:10px;animation-delay:.45s;}
+.mp-bar:nth-child(5){height:16px;animation-delay:.6s;}
+.mp-bar:nth-child(6){height:7px; animation-delay:.75s;}
+.mp-bar:nth-child(7){height:13px;animation-delay:.9s;}
+@keyframes waveAnim{
+  0%,100%{transform:scaleY(1);}
+  50%{transform:scaleY(.3);}
+}
+.mp-wave.paused .mp-bar{animation-play-state:paused;opacity:.25;}
+
+/* play/pause button — mini arch */
+.mp-btn{
+  width:48px;height:56px;
+  background:var(--terra);
+  border:none;border-radius:24px 24px 0 0;
+  cursor:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--warm);
+  transition:all .3s;
+  box-shadow:0 4px 12px rgba(168,96,80,.3);
+}
+.mp-btn:hover{background:var(--terra2);transform:scale(1.06);}
+.mp-btn.playing{background:var(--sage);}
+.mp-btn.playing:hover{background:var(--sage2);}
+
+/* volume row */
+.mp-vol-row{
+  display:flex;align-items:center;gap:8px;width:100%;
+}
+.mp-vol-icon{font-size:12px;opacity:.5;}
+input[type=range]#volSlider{
+  flex:1;height:3px;
+  -webkit-appearance:none;appearance:none;
+  background:var(--cream3);border-radius:2px;outline:none;cursor:none;
+}
+input[type=range]#volSlider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--terra);border:2px solid var(--warm);
+  box-shadow:0 1px 4px rgba(168,96,80,.4);cursor:none;
+}
+input[type=range]#volSlider::-moz-range-thumb{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--terra);border:2px solid var(--warm);cursor:none;
+}
+
+/* now-playing text */
+.mp-now{
+  font-size:9px;color:var(--ink3);letter-spacing:.2em;
+  font-family:'Caveat',cursive;font-style:italic;
+  text-align:center;opacity:.7;
+  white-space:nowrap;overflow:hidden;
+  animation:marquee 12s linear infinite;
+}
+@keyframes marquee{
+  0%{transform:translateX(60px);}
+  100%{transform:translateX(-160px);}
+}
+.mp-now.paused{animation-play-state:paused;}
+</style>
+
+<!-- Player DOM -->
+<div id="musicPlayer">
+  <div class="mp-arch">
+    <div class="mp-label">治愈音乐<br>Healing Ambient</div>
+    <div class="mp-wave paused" id="mpWave">
+      <div class="mp-bar"></div><div class="mp-bar"></div>
+      <div class="mp-bar"></div><div class="mp-bar"></div>
+      <div class="mp-bar"></div><div class="mp-bar"></div>
+      <div class="mp-bar"></div>
+    </div>
+    <button class="mp-btn" id="mpBtn" onclick="toggleMusic()">▷</button>
+    <div class="mp-vol-row">
+      <span class="mp-vol-icon">♪</span>
+      <input type="range" id="volSlider" min="0" max="100" value="55" oninput="setVol(this.value)">
+    </div>
+    <div class="mp-now paused" id="mpNow">✦ 此刻只属于你 · muji style · healing ✦</div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   GENERATIVE MUJI-STYLE AMBIENT MUSIC
+   Web Audio API — pentatonic piano + pad + reverb
+══════════════════════════════════════════════ */
+
+let audioCtx=null, masterGain=null, reverb=null, delay=null;
+let isPlaying=false;
+let scheduleTimer=null, padTimer=null, melTimer=null;
+
+// pentatonic scale (C major penta: C D E G A) across octaves
+const PENTA=[
+  // bass pad octave
+  65.41,  // C2
+  73.42,  // D2
+  82.41,  // E2
+  98.00,  // G2
+  110.00, // A2
+  // mid
+  130.81, // C3
+  146.83, // D3
+  164.81, // E3
+  196.00, // G3
+  220.00, // A3
+  // melody
+  261.63, // C4
+  293.66, // D4
+  329.63, // E4
+  392.00, // G4
+  440.00, // A4
+  // high sparkle
+  523.25, // C5
+  587.33, // D5
+  659.25, // E5
+  783.99, // G5
+];
+
+function createCtx(){
+  if(audioCtx) return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+
+  // master gain
+  masterGain=audioCtx.createGain();
+  masterGain.gain.value=0.55;
+  masterGain.connect(audioCtx.destination);
+
+  // reverb (synthetic impulse response)
+  reverb=audioCtx.createConvolver();
+  const dur=3.2, rate=audioCtx.sampleRate;
+  const buf=audioCtx.createBuffer(2,rate*dur,rate);
+  for(let ch=0;ch<2;ch++){
+    const d=buf.getChannelData(ch);
+    for(let i=0;i<d.length;i++)
+      d[i]=(Math.random()*2-1)*Math.pow(1-i/(rate*dur),2.2);
+  }
+  reverb.buffer=buf;
+  reverb.connect(masterGain);
+
+  // delay
+  delay=audioCtx.createDelay(1.0);
+  delay.delayTime.value=0.38;
+  const delFeed=audioCtx.createGain(); delFeed.gain.value=0.28;
+  const delOut=audioCtx.createGain();  delOut.gain.value=0.22;
+  delay.connect(delFeed); delFeed.connect(delay);
+  delay.connect(delOut);  delOut.connect(reverb);
+}
+
+/* play a single soft note */
+function playNote(freq, startTime, duration, vol=0.18, type='sine', detune=0){
+  if(!audioCtx) return;
+  const osc=audioCtx.createOscillator();
+  const env=audioCtx.createGain();
+  const filter=audioCtx.createBiquadFilter();
+
+  osc.type=type;
+  osc.frequency.value=freq;
+  osc.detune.value=detune;
+
+  filter.type='lowpass';
+  filter.frequency.value=2200;
+  filter.Q.value=0.8;
+
+  const atk=0.06, rel=Math.min(duration*.7, 1.8);
+  env.gain.setValueAtTime(0, startTime);
+  env.gain.linearRampToValueAtTime(vol, startTime+atk);
+  env.gain.setValueAtTime(vol, startTime+atk);
+  env.gain.exponentialRampToValueAtTime(0.001, startTime+duration);
+
+  osc.connect(filter);
+  filter.connect(env);
+  env.connect(reverb);
+  env.connect(delay);
+
+  osc.start(startTime);
+  osc.stop(startTime+duration+0.05);
+}
+
+/* warm pad — long sustained notes */
+function playPad(freq, startTime, duration, vol=0.06){
+  if(!audioCtx) return;
+  // two slightly detuned oscillators for richness
+  [0, 4, -4].forEach((det,i)=>{
+    const osc=audioCtx.createOscillator();
+    const env=audioCtx.createGain();
+    const filter=audioCtx.createBiquadFilter();
+    osc.type='sine';
+    osc.frequency.value=freq;
+    osc.detune.value=det;
+    filter.type='lowpass'; filter.frequency.value=800; filter.Q.value=0.5;
+    const atk=1.2, rel=2.0;
+    env.gain.setValueAtTime(0,startTime);
+    env.gain.linearRampToValueAtTime(vol/(i+1), startTime+atk);
+    env.gain.setValueAtTime(vol/(i+1), startTime+duration-rel);
+    env.gain.linearRampToValueAtTime(0.0001, startTime+duration);
+    osc.connect(filter); filter.connect(env); env.connect(reverb);
+    osc.start(startTime); osc.stop(startTime+duration+0.1);
   });
 }
-setInterval(spawnPetal,800);
 
-function drawPetals(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  petals=petals.filter(p=>p.y<canvas.height+30);
-  petals.forEach(p=>{
-    p.x+=p.vx; p.y+=p.vy; p.rot+=p.drot;
-    ctx.save();
-    ctx.translate(p.x,p.y);
-    ctx.rotate(p.rot);
-    ctx.globalAlpha=p.alpha;
-    ctx.fillStyle=p.color;
-    ctx.beginPath();
-    ctx.ellipse(0,0,p.rx,p.ry,0,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  });
-  requestAnimationFrame(drawPetals);
+/* gentle high sparkle */
+function playSparkle(freq, startTime){
+  if(!audioCtx) return;
+  const osc=audioCtx.createOscillator();
+  const env=audioCtx.createGain();
+  osc.type='triangle'; osc.frequency.value=freq;
+  env.gain.setValueAtTime(0,startTime);
+  env.gain.linearRampToValueAtTime(0.06,startTime+0.02);
+  env.gain.exponentialRampToValueAtTime(0.001,startTime+1.2);
+  osc.connect(env); env.connect(reverb);
+  osc.start(startTime); osc.stop(startTime+1.4);
 }
-drawPetals();
+
+/* schedule ambient pad loop */
+function schedulePad(){
+  if(!isPlaying) return;
+  const t=audioCtx.currentTime;
+  // pick two complementary bass notes
+  const bassNotes=[PENTA[0],PENTA[2],PENTA[4],PENTA[1]]; // C2 E2 A2 D2
+  const n=bassNotes[Math.floor(Math.random()*bassNotes.length)];
+  const dur=6+Math.random()*4;
+  playPad(n,t,dur,0.055);
+  playPad(n*2,t+0.5,dur-1,0.03); // octave up
+  padTimer=setTimeout(schedulePad,(dur-2)*1000);
+}
+
+/* schedule melody notes */
+function scheduleMelody(){
+  if(!isPlaying) return;
+  const t=audioCtx.currentTime;
+
+  // choose from mid + high penta range for melody
+  const melRange=PENTA.slice(10,17); // C4 – E5
+  const freq=melRange[Math.floor(Math.random()*melRange.length)];
+  const dur=1.0+Math.random()*2.5;
+  playNote(freq, t, dur, 0.10+Math.random()*0.07, 'sine', (Math.random()-.5)*6);
+
+  // occasional sparkle on high end
+  if(Math.random()<0.3){
+    const sparkleRange=PENTA.slice(15);
+    const sf=sparkleRange[Math.floor(Math.random()*sparkleRange.length)];
+    playSparkle(sf, t+0.1);
+  }
+
+  // random interval 1.5 – 4.5s for organic feel
+  const next=1500+Math.random()*3000;
+  melTimer=setTimeout(scheduleMelody, next);
+}
+
+function toggleMusic(){
+  if(!isPlaying){
+    startMusic();
+  } else {
+    stopMusic();
+  }
+}
+
+function startMusic(){
+  createCtx();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  isPlaying=true;
+
+  const btn=document.getElementById('mpBtn');
+  btn.textContent='⏸';
+  btn.classList.add('playing');
+  document.getElementById('mpWave').classList.remove('paused');
+  document.getElementById('mpNow').classList.remove('paused');
+
+  schedulePad();
+  // slight delay before melody starts for atmosphere
+  melTimer=setTimeout(scheduleMelody, 800);
+}
+
+function stopMusic(){
+  isPlaying=false;
+  clearTimeout(padTimer);
+  clearTimeout(melTimer);
+
+  const btn=document.getElementById('mpBtn');
+  btn.textContent='▷';
+  btn.classList.remove('playing');
+  document.getElementById('mpWave').classList.add('paused');
+  document.getElementById('mpNow').classList.add('paused');
+
+  // fade out gracefully
+  if(masterGain){
+    masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
+    setTimeout(()=>{
+      if(!isPlaying){
+        audioCtx.suspend();
+        masterGain.gain.value=parseFloat(document.getElementById('volSlider').value)/100*0.8;
+      }
+    },1800);
+  }
+}
+
+function setVol(v){
+  if(masterGain) masterGain.gain.setTargetAtTime(v/100*0.8, audioCtx.currentTime, 0.1);
+}
 </script>
 </body>
 </html>
